@@ -6,7 +6,7 @@ import CreateAccount from './components/CreateAccount';
 
 const RouterComponent = () => {
     return (
-        <Router sceneStyle={{ paddingTop: 65 }}>
+        <Router navigationBarStyle={styles.navBar} titleStyle={styles.navTitle} sceneStyle={styles.routerScene}>
 
         <Scene key="auth">
             <Scene key="login" component={Login} title="Money Mapper" />
@@ -21,5 +21,21 @@ const RouterComponent = () => {
         </Router>
     );
 };
+
+const styles = {
+  navBar: {
+    fontFamily: 'Avenir',
+    backgroundColor: '#42f4bf',
+    borderBottomColor: 'transparent'
+  },
+  navTitle: {
+    fontFamily: 'Avenir',
+    color: 'white', // changing navbar title color
+  },
+  routerScene: {
+      borderColor: '#42f4bf',
+    paddingTop: 65, // some navbar padding to avoid content overlap
+  },
+}
 
 export default RouterComponent;

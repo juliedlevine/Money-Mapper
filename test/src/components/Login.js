@@ -50,7 +50,7 @@ class Login extends Component {
                 {this.renderButton()}
 
                 <View style={styles.separator}></View>
-                <Text style={styles.account}>New to MoneyMapper? Great!</Text>
+                <Text style={styles.text}>New to MoneyMapper? Great!</Text>
                 <TouchableHighlight style={styles.button} underlayColor='#99d9f4'>
                     <Text style={styles.buttonText} onPress={() => Actions.signup()}>Sign Up</Text>
                 </TouchableHighlight>
@@ -59,42 +59,50 @@ class Login extends Component {
     }
 }
 const styles = {
+    text: {
+        fontFamily: 'Avenir',
+    },
     container: {
+        fontFamily: 'Avenir',
         padding: 30,
         marginTop: 30,
         alignItems: 'center'
     },
     description: {
+        fontFamily: 'Avenir',
         marginBottom: 20,
         fontSize: 18,
         textAlign: 'center',
         color: '#656565'
     },
     icon: {
-        width: 20,
-        height: 20,
+        width: 40,
+        height: 40,
     },
     button: {
         height: 36,
-        backgroundColor: '#48BBEC',
-        borderColor: '#48BBEC',
+        backgroundColor: '#42f4bf',
+        borderColor: '#42f4bf',
         borderWidth: 1,
         borderRadius: 8,
         alignSelf: 'stretch',
         justifyContent: 'center'
     },
     buttonText: {
+        fontFamily: 'Avenir',
         fontSize: 18,
         color: 'white',
         alignSelf: 'center'
     },
     searchInput: {
+        fontFamily: 'Avenir',
         height: 36,
+        paddingLeft: 12,
         padding: 4,
         marginBottom: 10,
         fontSize: 16,
         borderWidth: 1,
-        borderColor: '#48BBEC',
+        borderColor: '#42f4bf',
         borderRadius: 8,
         color: 'black'
     },
@@ -106,9 +114,10 @@ const styles = {
         marginBottom: 10,
     },
     errorTextStyle: {
-    fontSize: 20,
-    alignSelf: 'center',
-    color: 'red'
+        fontFamily: 'Avenir',
+        fontSize: 20,
+        alignSelf: 'center',
+        color: 'red'
   }
 };
 

@@ -59,7 +59,7 @@ class Signup extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image source={require('./Resources/home.png')} style={styles.icon} />
+                <Image source={require('./Resources/id-card.png')} style={styles.icon} />
                 <Text style={styles.container}>Welcome! Please Fill out all fields.</Text>
                 <TextInput
                     style={styles.searchInput}
@@ -113,13 +113,13 @@ const styles = {
         color: '#656565'
     },
     icon: {
-        width: 20,
-        height: 20,
+        width: 40,
+        height: 40,
     },
     button: {
         height: 36,
-        backgroundColor: '#48BBEC',
-        borderColor: '#48BBEC',
+        backgroundColor: '#42f4bf',
+        borderColor: '#42f4bf',
         borderWidth: 1,
         borderRadius: 8,
         alignSelf: 'stretch',
@@ -136,7 +136,7 @@ const styles = {
         marginBottom: 10,
         fontSize: 16,
         borderWidth: 1,
-        borderColor: '#48BBEC',
+        borderColor: '#42f4bf',
         borderRadius: 8,
         color: 'black'
     },
