@@ -1,10 +1,12 @@
 console.disableYellowBox = true;
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ListView, ScrollView } from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ListView, ScrollView, TouchableHighlight, Modal } from 'react-native';
 import axios from 'axios';
-import { getExpenseData, updateAmount } from '../actions';
+import { Actions } from 'react-native-router-flux';
+import { getExpenseData, updateAmount, updateCategorySelected } from '../actions';
 import { Button, CardSection, Card } from './common';
+
 
 class Settings extends React.Component {
 
@@ -37,6 +39,11 @@ class Settings extends React.Component {
 
     }
 
+    addNew(mainCategory) {
+        this.props.updateCategorySelected(mainCategory);
+        Actions.addNewSubcategory();
+    }
+
     renderRow(category, sectionId, rowId) {
         let mainCategory = Object.keys(category)[0];
         let mainCategoryBudget = this.props.expenses[rowId][mainCategory].monthlyBudget;
@@ -55,7 +62,9 @@ class Settings extends React.Component {
 
                     <View style={styles.container}>
                         <Text style={styles.add}>Add Item</Text>
-                        <Image source={require('./Resources/plus.png')} style={styles.plusIcon} />
+                        <TouchableHighlight onPress={()=> this.addNew(mainCategory)}>
+                            <Image source={require('./Resources/plus.png')} style={styles.plusIcon} />
+                        </TouchableHighlight>
                     </View>
 
                 </Card>
@@ -172,4 +181,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { getExpenseData, updateAmount })(Settings);
+export default connect(mapStateToProps, { getExpenseData, updateAmount, updateCategorySelected })(Settings);

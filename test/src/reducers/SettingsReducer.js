@@ -1,11 +1,13 @@
 import deepcopy from 'deepcopy';
 import {
     GET_EXPENSES,
-    UPDATE_AMOUNT
+    UPDATE_AMOUNT,
+    UPDATE_CATEGORY_SELECTED
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  expenses: []
+  expenses: [],
+  categorySelected: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -14,6 +16,11 @@ export default (state = INITIAL_STATE, action) => {
     case GET_EXPENSES:
         return { ...state,
             expenses: action.payload
+        }
+
+    case UPDATE_CATEGORY_SELECTED:
+        return { ...state,
+            categorySelected: action.payload
         }
 
     case UPDATE_AMOUNT:
@@ -27,7 +34,7 @@ export default (state = INITIAL_STATE, action) => {
         console.log('new expenses', newExpenses)
         newExpenses[rowId][mainCategory].subcategories[idx][subCategoryName].monthlyBudget = value;
         console.log('modified new expenses', newExpenses);
-        return {
+        return { ...state,
             expenses: newExpenses
         }
 

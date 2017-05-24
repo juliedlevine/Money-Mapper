@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import SettingsReducer from './SettingsReducer';
-import LoginReducer from './LoginReducer';
+import LoginReducer from './LoginReducer'
 
 
 export default combineReducers({
   auth: LoginReducer,
-  expenses: SettingsReducer,
+  expenses: SettingsReducer
 });
 
 // export default combineReducers({

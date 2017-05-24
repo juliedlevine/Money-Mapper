@@ -3,20 +3,22 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 import Login from './components/Login';
 import Settings from './components/Settings';
 import CreateAccount from './components/CreateAccount';
+import AddNewSubcategory from './components/AddNewSubcategory';
 
 const RouterComponent = () => {
     return (
         <Router navigationBarStyle={styles.navBar} titleStyle={styles.navTitle} sceneStyle={styles.routerScene}>
 
-        <Scene key="auth">
-            <Scene key="login" component={Login} title="Money Mapper" />
-            <Scene key="signup" component={CreateAccount} title="Sign Up" />
-        </Scene>
+            <Scene key="auth">
+                <Scene key="login" component={Login} title="Money Mapper" />
+                <Scene key="signup" component={CreateAccount} title="Sign Up" />
+            </Scene>
 
-        <Scene key="main">
-            <Scene key="settings" component={Settings} title="Settings" />
-            {/* <Scene key="signup" component={CreateAccount} title="Sign Up" /> */}
-        </Scene>
+            <Scene key="main">
+                <Scene key="settings" component={Settings} title="Settings" />
+                <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
+                {/* <Scene key="signup" component={CreateAccount} title="Sign Up" /> */}
+            </Scene>
 
         </Router>
     );

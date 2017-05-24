@@ -1,6 +1,13 @@
 import axios from 'axios';
-import { GET_EXPENSES, UPDATE_AMOUNT } from './types';
+import { GET_EXPENSES, UPDATE_AMOUNT, UPDATE_CATEGORY_SELECTED } from './types';
 import ramda from 'ramda';
+
+export const updateCategorySelected = (mainCategory) => {
+    return {
+        type: UPDATE_CATEGORY_SELECTED,
+        payload: mainCategory
+    }
+}
 
 export const getExpenseData = (token) => {
     return (dispatch) => {
