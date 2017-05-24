@@ -24,8 +24,8 @@ export const createUserAccount = (first, last, email, password) => {
 
       axios.post(endpoint, axiosData)
       .then(response => {
-        const token = response.data
-        console.log('token returned: ', token );
+        const token = response.data.token;
+        // console.log('token returned: ', token );
         let user = { email: email, firstName: first, lastName: last, token: token};
         loginUserSuccess(dispatch, user);
       })
@@ -49,5 +49,5 @@ const loginUserSuccess = (dispatch, user) => {
     payload: user
   });
 
-  Actions.main();
+  Actions.setup();
 };

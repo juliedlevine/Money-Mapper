@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "deep-freeze": "0.0.1",
+    "deepcopy": "^0.6.3",
     "ramda": "^0.23.0",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",

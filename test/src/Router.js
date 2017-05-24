@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Settings from './components/Settings';
 import CreateAccount from './components/CreateAccount';
 import AddNewSubcategory from './components/AddNewSubcategory';
+import Home from './components/Home';
 
 const RouterComponent = () => {
     return (
@@ -13,10 +14,16 @@ const RouterComponent = () => {
                 <Scene key="login" component={Login} title="Money Mapper" />
                 <Scene key="signup" component={CreateAccount} title="Sign Up" />
             </Scene>
-
-            <Scene key="main">
+            <Scene key="setup">
                 <Scene key="settings" component={Settings} title="Settings" />
                 <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
+            </Scene>
+            <Scene key="main">
+                <Scene key="home" component={Home} title="Status"  rightTitle="edit" onRight={()=>{Actions.settings()}} />
+                <Scene key="settings" component={Settings} title="Settings" />
+                <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
+
+
                 {/* <Scene key="signup" component={CreateAccount} title="Sign Up" /> */}
             </Scene>
 
@@ -26,7 +33,7 @@ const RouterComponent = () => {
 
 const styles = {
   navBar: {
-    fontFamily: 'Avenir',
+    // fontFamily: 'Avenir',
     backgroundColor: '#42f4bf',
     borderBottomColor: 'transparent'
   },

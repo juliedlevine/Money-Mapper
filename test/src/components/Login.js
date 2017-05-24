@@ -63,7 +63,7 @@ const styles = {
         fontFamily: 'Avenir',
     },
     container: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         padding: 30,
         marginTop: 30,
         alignItems: 'center'

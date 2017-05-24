@@ -8,7 +8,7 @@ import { getExpenseData, updateAmount, updateCategorySelected } from '../actions
 import { Button, CardSection, Card } from './common';
 
 
-class Settings extends React.Component {
+class Home extends React.Component {
 
     componentDidMount() {
         this.props.getExpenseData(this.props.user.token);
@@ -24,15 +24,15 @@ class Settings extends React.Component {
             let subCategoryName = Object.keys(subcategory)[0];
             let monthlyBudget = this.props.expenses[rowId][mainCategory].subcategories[idx][subCategoryName].monthlyBudget;
             return (
-                <View
-                      style={styles.container}>
+                <View style={styles.container}>
                     <Text style={styles.subcategory}>{subCategoryName}</Text>
-                    <TextInput
+                    {/* <TextInput
                         keyboardType='numeric'
                         value={'$' + monthlyBudget}
                         onChangeText={value => this.amountChanged(value, mainCategory, rowId, idx, subCategoryName)}
                         style={styles.inputText}
-                        />
+                        /> */}
+                    <Text style={styles.inputText}>{'$' + monthlyBudget}</Text>
                 </View>
             )
         })
@@ -61,12 +61,12 @@ class Settings extends React.Component {
 
                     {this.subcategories(subcategories, mainCategory, rowId)}
 
-                    <View style={styles.container}>
+                    {/* <View style={styles.container}>
                         <Text style={styles.add}>Add Item</Text>
                         <TouchableHighlight onPress={()=> this.addNew(mainCategory)}>
                             <Image source={require('./Resources/plus.png')} style={styles.plusIcon} />
                         </TouchableHighlight>
-                    </View>
+                    </View> */}
 
                 </Card>
             </View>
@@ -97,13 +97,14 @@ class Settings extends React.Component {
                             <Text style={styles.total}>{totalMonthlyBudget.toFixed(2)}</Text>
                         </View>
                     )}
-                    renderFooter={()=> (
-                        <View>
-                            <View style={styles.separator}></View>
-                            <Button onPress={() => Actions.main()} >Done</Button>
-                            <View style={styles.separator}></View>
-                        </View>
-                    )}/>
+                    // renderFooter={()=> (
+                    //     <View>
+                    //         <View style={styles.separator}></View>
+                    //         <Button>Done</Button>
+                    //         <View style={styles.separator}></View>
+                    //     </View>
+                    // )}
+                  />
 
             </View>
         )
@@ -185,4 +186,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { getExpenseData, updateAmount, updateCategorySelected })(Settings);
+export default connect(mapStateToProps, { getExpenseData, updateAmount, updateCategorySelected })(Home);
