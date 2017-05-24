@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // action dispatched when user clicks Done button on Add New Subcategory page
 export const addNewSubcategory = (token, categoryName, subcategory, amount) => {
+
     return (dispatch) => {
         const axiosData = {
             token: token,
@@ -10,13 +11,13 @@ export const addNewSubcategory = (token, categoryName, subcategory, amount) => {
             subcategory: subcategory,
             amount: amount
         };
+
         const endpoint = "http://localhost:5007/api/addnewsubcategory";
 
         axios.post(endpoint, axiosData)
             .then(response => {
-                console.log(response.message);
                 // After everything is successful re-route the user to the settings page
-                Actions.main();
+                Actions.settings();
             })
             .catch(err => {
                 console.log('error: ', err);
