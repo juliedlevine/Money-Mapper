@@ -22,6 +22,8 @@ class Home extends React.Component {
     subcategories(subcategories, mainCategory, rowId) {
         let subCategoryRows = subcategories.map((subcategory, idx) => {
             let subCategoryName = Object.keys(subcategory)[0];
+
+            // monthlyBudget needs to be either amount remaining for that category, or amount
             let monthlyBudget = this.props.expenses[rowId][mainCategory].subcategories[idx][subCategoryName].monthlyBudget;
             return (
                 <View style={styles.container}>
@@ -92,18 +94,39 @@ class Home extends React.Component {
                     renderRow={this.renderRow.bind(this)}
                     renderHeader={()=> (
                         <View style={styles.intro}>
+                            <Text style={styles.statusText}>Hello {this.props.user.firstName}!</Text>
                             <Image source={require('./Resources/piggy-bank.png')} style={styles.icon} />
-                            <Text style={styles.settingsText}>{this.props.user.firstName}s Budget Total:</Text>
-                            <Text style={styles.total}>{totalMonthlyBudget.toFixed(2)}</Text>
+
+                            <CardSection>
+                                <View style={styles.totals}>
+                                    <Text style={styles.totalsText}>Your Budget</Text>
+                                    <Text style={styles.amountText}>${totalMonthlyBudget.toFixed(2)}</Text>
+                                </View>
+                            </CardSection>
+
+                            <CardSection>
+                                <View style={styles.totals}>
+                                    <Text style={styles.totalsText}>Spent</Text>
+                                    <Text style={styles.amountText}>$1125.23</Text>
+                                </View>
+                            </CardSection>
+
+                            <CardSection>
+                                <View style={styles.totals}>
+                                    <Text style={styles.totalsText}>Remaining</Text>
+                                    <Text style={styles.amountText}>$524.77</Text>
+                                </View>
+                            </CardSection>
+
+                            <View style={styles.separator}></View>
+
                         </View>
                     )}
-                    // renderFooter={()=> (
-                    //     <View>
-                    //         <View style={styles.separator}></View>
-                    //         <Button>Done</Button>
-                    //         <View style={styles.separator}></View>
-                    //     </View>
-                    // )}
+                    renderFooter={()=> (
+                        <View>
+                            <View style={styles.separator}></View>
+                        </View>
+                    )}
                   />
 
             </View>
@@ -112,17 +135,13 @@ class Home extends React.Component {
 };
 
 const styles = {
-    total: {
-        fontSize: 18,
-        fontWeight: '600',
-        marginTop: 7,
-        marginBottom: 30,
-    },
     intro: {
         marginTop: 50,
         alignItems: 'center'
     },
     icon: {
+        marginTop: 20,
+        marginBottom: 30,
         width: 40,
         height: 40,
     },
@@ -140,14 +159,41 @@ const styles = {
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
+    totals: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        height: 25
+    },
+    totalsText: {
+        fontSize: 16,
+        fontFamily: 'Avenir',
+        alignSelf: 'center',
+        paddingLeft: 5,
+    },
+    amountText: {
+        fontSize: 16,
+        fontFamily: 'Avenir',
+        fontWeight: '600',
+        alignSelf: 'center',
+        paddingRight: 10,
+    },
+    lastAmount: {
+        paddingBottom: 20,
+    },
     inputText: {
         width: 85,
-        height: 36,
+        height: 25,
+        marginTop: 10,
         marginBottom: 10,
         fontSize: 15,
         color: 'black',
         textAlign: 'right',
-        paddingRight: 5,
+        paddingRight: 10,
+        fontFamily: 'Avenir',
+    },
+    statusText: {
+        fontSize: 16,
         fontFamily: 'Avenir',
     },
     header: {
@@ -159,11 +205,8 @@ const styles = {
         color: 'white',
         alignSelf: 'center',
         fontSize: 17,
-        fontWeight: '600'
-    },
-    settingsText: {
-        marginTop: 30,
-        fontFamily: 'Avenir',
+        fontWeight: '600',
+        paddingRight: 10,
     },
     subcategory: {
         fontFamily: 'Avenir',

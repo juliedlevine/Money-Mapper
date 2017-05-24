@@ -92,9 +92,9 @@ class Settings extends React.Component {
                     renderRow={this.renderRow.bind(this)}
                     renderHeader={()=> (
                         <View style={styles.intro}>
-                            <Image source={require('./Resources/piggy-bank.png')} style={styles.icon} />
-                            <Text style={styles.settingsText}>{this.props.user.firstName}s Budget Total:</Text>
-                            <Text style={styles.total}>{totalMonthlyBudget.toFixed(2)}</Text>
+                            <Image source={require('./Resources/settings.png')} style={styles.icon} />
+                            <Text style={styles.settingsText}>Your Budget Total:</Text>
+                            <Text style={styles.total}>${totalMonthlyBudget.toFixed(2)}</Text>
                         </View>
                     )}
                     renderFooter={()=> (
@@ -129,7 +129,8 @@ const styles = {
         width: 20,
         height: 20,
         alignSelf: 'center',
-        marginRight: 10,
+        marginRight: 7,
+        marginTop: 7,
     },
     separator: {
         height: 20
@@ -141,12 +142,13 @@ const styles = {
     },
     inputText: {
         width: 85,
-        height: 36,
+        height: 25,
         marginBottom: 10,
+        marginTop: 10,
         fontSize: 15,
         color: 'black',
         textAlign: 'right',
-        paddingRight: 5,
+        paddingRight: 10,
         fontFamily: 'Avenir',
     },
     header: {
@@ -158,7 +160,8 @@ const styles = {
         color: 'white',
         alignSelf: 'center',
         fontSize: 17,
-        fontWeight: '600'
+        fontWeight: '600',
+        paddingRight: 6,
     },
     settingsText: {
         marginTop: 30,
