@@ -26,9 +26,10 @@ class AddNewSubcategory extends React.Component {
     addNewClick() {
         let token = this.props.token;
         let categoryName = this.props.categorySelected;
+
         let subcategory = this.state.name;
         let amount = this.state.amount;
-        this.props.addNewSubCategory(token, categoryName, subcategory, amount)
+        this.props.addNewSubcategory(token, categoryName, subcategory, amount);
     }
 
     render() {
@@ -108,7 +109,6 @@ const styles = {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         token: state.auth.user.token,
         categorySelected: state.expenses.categorySelected
