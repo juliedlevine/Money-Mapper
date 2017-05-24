@@ -9,16 +9,17 @@ export const getExpenseData = (token) => {
             token: token,
             timeFrame: "thismonth"
         };
-        const endpoint = "http://localhost:5007/api/expenses";
+        const endpoint = "http://localhost:5007/api/expenses2";
         axios.post(endpoint, axiosData)
             .then(response => {
-                const expenses = response.data;
-                const refactorExpenses = Object.keys(expenses).map(category => {
-                    return Object.assign({}, expenses[category], {category: category})
-                })
+                // console.log(JSON.stringify(response.data, null, '  '));
+                // const expenses = response.data;
+                // // const refactorExpenses = Object.keys(expenses).map(category => {
+                // //     return Object.assign({}, expenses[category], {category: category})
+                // })
                 dispatch({
                     type: GET_EXPENSES,
-                    payload: refactorExpenses
+                    payload: response.data
                 });
         })
         .catch(err => {
@@ -27,12 +28,15 @@ export const getExpenseData = (token) => {
     };
 };
 
-export const updateAmount = (value, id) => {
+export const updateAmount = (value, mainCategory, rowId, idx, subCategoryName) => {
     return {
         type: UPDATE_AMOUNT,
         payload: {
             value: value,
-            id: id
+            mainCategory: mainCategory,
+            rowId: rowId,
+            idx: idx,
+            subCategoryName: subCategoryName
         }
     }
 }

@@ -7,61 +7,51 @@ import { getExpenseData, updateAmount } from '../actions';
 import { Button, CardSection, Card } from './common';
 
 class Settings extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         amounts: {
-    //             1: 0,
-    //             2: 0
-    //         }
-    //     };
-    // }
 
     componentDidMount() {
         this.props.getExpenseData(this.props.user.token);
-        console.log()
     }
 
-    amountChanged(value, id) {
-        // this.setState({
-        //     [id]: value
-        // });
-        // console.log(this.state);
-        this.props.updateAmount(value, id);
+    amountChanged(value, mainCategory, rowId, idx, subCategoryName) {
+        let newValue = value.substring(1);
+        this.props.updateAmount(newValue, mainCategory, rowId, idx, subCategoryName);
     }
 
-    subcategories(subcategories) {
-        const refactorSubCategories = Object.keys(subcategories).map(subcategory => {
-            return Object.assign({}, subcategories[subcategory], {subcategory: subcategory})
-        })
-        // console.log(JSON.stringify(this.props.expenses, null, '  '));
-        return refactorSubCategories.map(subcategory=> {
+    subcategories(subcategories, mainCategory, rowId) {
+        let subCategoryRows = subcategories.map((subcategory, idx) => {
+            let subCategoryName = Object.keys(subcategory)[0];
+            let monthlyBudget = this.props.expenses[rowId][mainCategory].subcategories[idx][subCategoryName].monthlyBudget;
             return (
                 <View style={styles.container}>
-                    <Text style={styles.subcategory}>{subcategory.subcategory}</Text>
+                    <Text style={styles.subcategory}>{subCategoryName}</Text>
                     <TextInput
                         keyboardType='numeric'
-                        value={'$' + subcategory.monthlyBudget}
-                        onChangeText={value => this.amountChanged(value, subcategory.id)}
+                        value={'$' + monthlyBudget}
+                        onChangeText={value => this.amountChanged(value, mainCategory, rowId, idx, subCategoryName)}
                         style={styles.inputText}
                         />
                 </View>
             )
         })
+        return (subCategoryRows);
+
     }
 
-    renderRow(category) {
+    renderRow(category, sectionId, rowId) {
+        let mainCategory = Object.keys(category)[0];
+        let mainCategoryBudget = this.props.expenses[rowId][mainCategory].monthlyBudget;
+        let subcategories = this.props.expenses[rowId][mainCategory].subcategories;
         return (
             <View>
                 <Card>
                     <CardSection style={styles.header}>
                         <View style={styles.container}>
-                            <Text style={styles.headerText}>{category.category.toUpperCase()}</Text>
-                            <Text style={styles.headerText}>${category.monthlyBudget}</Text>
+                            <Text style={styles.headerText}>{mainCategory.toUpperCase()}</Text>
+                            <Text style={styles.headerText}>${mainCategoryBudget}</Text>
                         </View>
                     </CardSection>
 
-                    {this.subcategories(category.subcategories)}
+                    {this.subcategories(subcategories, mainCategory, rowId)}
 
                     <View style={styles.container}>
                         <Text style={styles.add}>Add Item</Text>
@@ -79,7 +69,9 @@ class Settings extends React.Component {
             rowHasChanged: (r1, r2) => r1 !== r2
         });
         this.dataSource = ds.cloneWithRows(this.props.expenses);
-
+        if (this.props.expenses.length > 0) {
+            console.log('monthlyBudget:', this.props.expenses[0].Food.subcategories[0].monthlyBudget);
+        }
         return (
             <View>
                 <ListView

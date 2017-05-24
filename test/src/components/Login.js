@@ -16,8 +16,8 @@ class Login extends Component {
       return <Spinner size='large' />;
     }
     return (
-      <TouchableHighlight style={styles.button} underlayColor='#99d9f4'>
-          <Text style={styles.buttonText} onPress={() => this.signIn()}>Sign In</Text>
+      <TouchableHighlight style={styles.button} underlayColor='#99d9f4' onPress={() => this.signIn()}>
+          <Text style={styles.buttonText}>Sign In</Text>
       </TouchableHighlight>
     );
   }
@@ -51,8 +51,8 @@ class Login extends Component {
 
                 <View style={styles.separator}></View>
                 <Text style={styles.text}>New to MoneyMapper? Great!</Text>
-                <TouchableHighlight style={styles.button} underlayColor='#99d9f4'>
-                    <Text style={styles.buttonText} onPress={() => Actions.signup()}>Sign Up</Text>
+                <TouchableHighlight style={styles.button} onPress={() => Actions.signup()} underlayColor='#99d9f4'>
+                    <Text style={styles.buttonText}>Sign Up</Text>
                 </TouchableHighlight>
           </View>
         );
@@ -77,10 +77,10 @@ const styles = {
     },
     icon: {
         width: 40,
-        height: 40,
+        height:40,
     },
     button: {
-        height: 36,
+        height: 45,
         backgroundColor: '#42f4bf',
         borderColor: '#42f4bf',
         borderWidth: 1,
@@ -96,7 +96,7 @@ const styles = {
     },
     searchInput: {
         fontFamily: 'Avenir',
-        height: 36,
+        height: 45,
         paddingLeft: 12,
         padding: 4,
         marginBottom: 10,

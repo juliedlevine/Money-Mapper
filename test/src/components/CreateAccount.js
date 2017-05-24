@@ -91,8 +91,8 @@ class Signup extends Component {
                 <Text>
                   {this.state.error}
                 </Text>
-                <TouchableHighlight style={styles.button} underlayColor='#99d9f4'>
-                    <Text style={styles.buttonText} onPress={() => this.signUp()}>Sign Up</Text>
+                <TouchableHighlight style={styles.button} onPress={() => this.signUp()} underlayColor='#99d9f4'>
+                    <Text style={styles.buttonText}>Sign Up</Text>
                 </TouchableHighlight>
 
           </View>
@@ -117,7 +117,7 @@ const styles = {
         height: 40,
     },
     button: {
-        height: 36,
+        height: 45,
         backgroundColor: '#42f4bf',
         borderColor: '#42f4bf',
         borderWidth: 1,
@@ -131,7 +131,7 @@ const styles = {
         alignSelf: 'center'
     },
     searchInput: {
-        height: 36,
+        height: 45,
         padding: 4,
         marginBottom: 10,
         fontSize: 16,
