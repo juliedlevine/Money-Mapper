@@ -91,7 +91,7 @@ class Home extends React.Component {
           return accum + Number(category[Object.keys(category)[0]].spent);
         },0);
 
-        const remaining = totalMonthlyBudget - totalSpent;
+        const remaining = (totalMonthlyBudget - totalSpent).toFixed(2);
 
         return (
             <View>

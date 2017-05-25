@@ -28,7 +28,7 @@ export const saveExpenseData = (token, expenses) => {
 
 const saveExpenseDataComplete= () => {
   console.log('what about here?');
-  Actions.pop();
+  Actions.home();
 };
 
 export const updateCategorySelected = (mainCategory) => {
