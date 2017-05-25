@@ -69,7 +69,7 @@ class Settings extends React.Component {
                     {this.subcategories(subcategories, mainCategory, rowId)}
 
                     <View style={styles.container}>
-                        <Text style={styles.add}>Add Item</Text>
+                        <Text style={styles.add}>Add Subcategory</Text>
                         <TouchableHighlight onPress={()=> this.addNew(mainCategory)}>
                             <Image source={require('./Resources/plus.png')} style={styles.plusIcon} />
                         </TouchableHighlight>

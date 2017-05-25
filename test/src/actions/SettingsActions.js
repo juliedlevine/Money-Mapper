@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import { GET_EXPENSES, UPDATE_AMOUNT, UPDATE_CATEGORY_SELECTED, SAVE_SETTINGS } from './types';
 
 export const saveExpenseData = (token, expenses) => {
@@ -28,7 +28,7 @@ export const saveExpenseData = (token, expenses) => {
 
 const saveExpenseDataComplete= () => {
   console.log('what about here?');
-  Actions.home();
+  Actions.home({type: ActionConst.RESET});
 };
 
 export const updateCategorySelected = (mainCategory) => {
