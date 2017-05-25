@@ -50,6 +50,7 @@ class AddNewSubcategory extends React.Component {
                         onChangeText={text => this.updateAmount(text)}
                         autoCorrect={false}
                         autoCapitalize={'none'}
+                        keyboardType='numeric'
                         value={this.state.amount} />
                     <TouchableHighlight
                         style={styles.button}

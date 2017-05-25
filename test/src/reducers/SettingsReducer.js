@@ -3,16 +3,24 @@ import {
     GET_EXPENSES,
     UPDATE_AMOUNT,
     UPDATE_CATEGORY_SELECTED,
-    SAVE_SETTINGS
+    SAVE_SETTINGS,
+    UPDATE_TRANSACTION_DATE,
 } from '../actions/types';
 
 const INITIAL_STATE = {
   expenses: [],
-  categorySelected: ''
+  categorySelected: '',
+  transactionDate: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+
+    case UPDATE_TRANSACTION_DATE:
+        console.log('Date in settings reducer', action.payload);
+        return { ...state,
+            transactionDate: action.payload
+        }
 
     case GET_EXPENSES:
         return { ...state,

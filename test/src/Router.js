@@ -28,6 +28,7 @@ const RouterComponent = () => {
                 <Scene key="budgetConfig" component={Settings} title="Budget Configuration" />
                 <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
                 <Scene key="viewSubcategoryTransactions" component={SubcategoryTransactions} title="Purchases" />
+                <Scene key="addNewTransaction" title="Add New Transaction" component={AddNewTransaction} />
             </Scene>
 
           </Scene>
