@@ -87,6 +87,12 @@ class Home extends React.Component {
           },0);
         },0);
 
+        const totalSpent = this.props.expenses.reduce((accum, category) =>{
+          return accum + Number(category[Object.keys(category)[0]].spent);
+        },0);
+
+        const remaining = totalMonthlyBudget - totalSpent;
+
         return (
             <View>
                 <ListView
@@ -107,14 +113,14 @@ class Home extends React.Component {
                             <CardSection>
                                 <View style={styles.totals}>
                                     <Text style={styles.totalsText}>Spent</Text>
-                                    <Text style={styles.amountText}>$1125.23</Text>
+                                    <Text style={styles.amountText}>{'$' + totalSpent}</Text>
                                 </View>
                             </CardSection>
 
                             <CardSection>
                                 <View style={styles.totals}>
                                     <Text style={styles.totalsText}>Remaining</Text>
-                                    <Text style={styles.amountText}>$524.77</Text>
+                                    <Text style={styles.amountText}>{'$' + remaining}</Text>
                                 </View>
                             </CardSection>
 

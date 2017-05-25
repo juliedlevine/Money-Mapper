@@ -22,9 +22,6 @@ const RouterComponent = () => {
                 <Scene key="home" component={Home} title="Status" rightButtonImage={require("./components/Resources/settings2.png")} onRight={()=>{Actions.settings()}}/>
                 <Scene key="settings" component={Settings} title="Budget Configuration" />
                 <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
-
-
-                {/* <Scene key="signup" component={CreateAccount} title="Sign Up" /> */}
             </Scene>
 
         </Router>
