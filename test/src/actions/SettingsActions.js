@@ -1,6 +1,35 @@
 import axios from 'axios';
-import { GET_EXPENSES, UPDATE_AMOUNT, UPDATE_CATEGORY_SELECTED } from './types';
-import ramda from 'ramda';
+import { Actions } from 'react-native-router-flux';
+import { GET_EXPENSES, UPDATE_AMOUNT, UPDATE_CATEGORY_SELECTED, SAVE_SETTINGS } from './types';
+
+export const saveExpenseData = (token, expenses) => {
+    console.log("entering saveExpenseData");
+    return (dispatch) => {
+
+        const axiosData = {
+            token: token,
+            expenses: expenses
+        };
+        const endpoint = "http://localhost:5007/api/saveexpenses";
+        axios.post(endpoint, axiosData)
+            .then(response => {
+                dispatch({
+                    type: SAVE_SETTINGS,
+                    payload: response.data
+                });
+            console.log("am i getting here?");
+            saveExpenseDataComplete();
+        })
+        .catch(err => {
+            console.log('error retrieving expenses: ', err);
+        });
+    };
+};
+
+const saveExpenseDataComplete= () => {
+  console.log('what about here?');
+  Actions.pop();
+};
 
 export const updateCategorySelected = (mainCategory) => {
     return {

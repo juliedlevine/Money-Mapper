@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ListView, ScrollView, TouchableHighlight, Modal } from 'react-native';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
-import { getExpenseData, updateAmount, updateCategorySelected } from '../actions';
+import { getExpenseData, updateAmount, updateCategorySelected, saveExpenseData } from '../actions';
 import { Button, CardSection, Card } from './common';
 
 
@@ -43,6 +43,13 @@ class Settings extends React.Component {
     addNew(mainCategory) {
         this.props.updateCategorySelected(mainCategory);
         Actions.addNewSubcategory();
+    }
+
+    saveChanges(){
+      console.log('saving changes');
+      console.log('token: ', this.props.user.token);
+      console.log('expenses: ', this.props.expenses);
+      this.props.saveExpenseData(this.props.user.token, this.props.expenses);
     }
 
     renderRow(category, sectionId, rowId) {
@@ -100,7 +107,7 @@ class Settings extends React.Component {
                     renderFooter={()=> (
                         <View>
                             <View style={styles.separator}></View>
-                            <Button onPress={() => Actions.main()} >Done</Button>
+                            <Button onPress={() => this.saveChanges()} >Done</Button>
                             <View style={styles.separator}></View>
                         </View>
                     )}/>
@@ -185,4 +192,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { getExpenseData, updateAmount, updateCategorySelected })(Settings);
+export default connect(mapStateToProps, { getExpenseData, updateAmount, updateCategorySelected, saveExpenseData })(Settings);

@@ -15,12 +15,12 @@ const RouterComponent = () => {
                 <Scene key="signup" component={CreateAccount} title="Sign Up" />
             </Scene>
             <Scene key="setup">
-                <Scene key="settings" component={Settings} title="Settings" />
+                <Scene key="settings" component={Settings} title="Settings1" />
                 <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
             </Scene>
             <Scene key="main">
                 <Scene key="home" component={Home} title="Status"  rightTitle="edit" onRight={()=>{Actions.settings()}} />
-                <Scene key="settings" component={Settings} title="Settings" />
+                <Scene key="settings" component={Settings} title="Settings2" />
                 <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
 
 
