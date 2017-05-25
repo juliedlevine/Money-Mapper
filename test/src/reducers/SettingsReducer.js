@@ -2,7 +2,8 @@ import deepcopy from 'deepcopy';
 import {
     GET_EXPENSES,
     UPDATE_AMOUNT,
-    UPDATE_CATEGORY_SELECTED
+    UPDATE_CATEGORY_SELECTED,
+    SAVE_SETTINGS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -42,6 +43,10 @@ export default (state = INITIAL_STATE, action) => {
         return { ...state,
             expenses: newExpenses
         }
+
+    case SAVE_SETTINGS:
+
+        return state;
 
     default:
         return state;

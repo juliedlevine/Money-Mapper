@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ListView, ScrollView, TouchableHighlight, Modal } from 'react-native';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
-import { getExpenseData, updateAmount, updateCategorySelected } from '../actions';
+import { getExpenseData, updateAmount, updateCategorySelected, saveExpenseData } from '../actions';
 import { Button, CardSection, Card } from './common';
 
 
@@ -45,6 +45,13 @@ class Settings extends React.Component {
         Actions.addNewSubcategory();
     }
 
+    saveChanges(){
+      console.log('saving changes');
+      console.log('token: ', this.props.user.token);
+      console.log('expenses: ', this.props.expenses);
+      this.props.saveExpenseData(this.props.user.token, this.props.expenses);
+    }
+
     renderRow(category, sectionId, rowId) {
         let mainCategory = Object.keys(category)[0];
         let mainCategoryBudget = this.props.expenses[rowId][mainCategory].monthlyBudget;
@@ -62,7 +69,7 @@ class Settings extends React.Component {
                     {this.subcategories(subcategories, mainCategory, rowId)}
 
                     <View style={styles.container}>
-                        <Text style={styles.add}>Add Item</Text>
+                        <Text style={styles.add}>Add Subcategory</Text>
                         <TouchableHighlight onPress={()=> this.addNew(mainCategory)}>
                             <Image source={require('./Resources/plus.png')} style={styles.plusIcon} />
                         </TouchableHighlight>
@@ -100,7 +107,7 @@ class Settings extends React.Component {
                     renderFooter={()=> (
                         <View>
                             <View style={styles.separator}></View>
-                            <Button onPress={() => Actions.main()} >Done</Button>
+                            <Button onPress={() => this.saveChanges()} >Done</Button>
                             <View style={styles.separator}></View>
                         </View>
                     )}/>
@@ -188,4 +195,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { getExpenseData, updateAmount, updateCategorySelected })(Settings);
+export default connect(mapStateToProps, { getExpenseData, updateAmount, updateCategorySelected, saveExpenseData })(Settings);

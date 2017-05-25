@@ -12,3 +12,5 @@ export const CREATING_USER = 'creating_user';
 export const GET_EXPENSES = 'get_expenses';
 export const UPDATE_AMOUNT = 'update_amount';
 export const UPDATE_CATEGORY_SELECTED = 'update_category_selected';
+export const SAVE_SETTINGS = 'save_settings';
+export const DISPLAY_SUB_DETAILS = 'display_sub_details';

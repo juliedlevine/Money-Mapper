@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_EXPENSES, UPDATE_AMOUNT, UPDATE_CATEGORY_SELECTED } from './types';
+import { GET_EXPENSES, UPDATE_AMOUNT, UPDATE_CATEGORY_SELECTED, DISPLAY_SUB_DETAILS } from './types';
 
 export const updateCategorySelected = (mainCategory) => {
     return {
@@ -18,11 +18,7 @@ export const getExpenseData = (token) => {
         const endpoint = "http://localhost:5007/api/expenses2";
         axios.post(endpoint, axiosData)
             .then(response => {
-                // console.log(JSON.stringify(response.data, null, '  '));
-                // const expenses = response.data;
-                // // const refactorExpenses = Object.keys(expenses).map(category => {
-                // //     return Object.assign({}, expenses[category], {category: category})
-                // })
+
                 dispatch({
                     type: GET_EXPENSES,
                     payload: response.data

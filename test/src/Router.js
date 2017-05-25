@@ -4,36 +4,33 @@ import Login from './components/Login';
 import Settings from './components/Settings';
 import CreateAccount from './components/CreateAccount';
 import AddNewSubcategory from './components/AddNewSubcategory';
+import SubcategoryTransactions from './components/SubcategoryTransactions';
 import Home from './components/Home';
 import AddNewTransaction from './components/AddNewTransaction';
 
 const RouterComponent = () => {
     return (
         <Router navigationBarStyle={styles.navBar} titleStyle={styles.navTitle} sceneStyle={styles.routerScene} barButtonIconStyle={{ tintColor: 'white' }}>
-
+          <Scene key="root">
             <Scene key="auth">
                 <Scene key="login" component={Login} title="Money Mapper" />
                 <Scene key="signup" component={CreateAccount} title="Sign Up" />
             </Scene>
-            <Scene key="setup">
-                <Scene key="settings" component={Settings} title="Settings" />
-                <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
-            </Scene>
+
             <Scene key="main">
+
                 <Scene key="home"
                     component={Home}
-                    title="Status"
+                    title="Spending Summary"
                     leftButtonImage={require("./components/Resources/add.png")} onLeft={()=>{Actions.addNewTransaction()}}
-                    rightButtonImage={require("./components/Resources/settings2.png")} onRight={()=>{Actions.settings()}}
+                    rightButtonImage={require("./components/Resources/settings2.png")} onRight={()=>{Actions.budgetConfig()}}
                 />
-                <Scene key="settings" component={Settings} title="Budget Configuration" />
-                <Scene key="addNewTransaction" component={AddNewTransaction} title="Add New Transaction" />
+                <Scene key="budgetConfig" component={Settings} title="Budget Configuration" />
                 <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
-
-
-                {/* <Scene key="signup" component={CreateAccount} title="Sign Up" /> */}
+                <Scene key="viewSubcategoryTransactions" component={SubcategoryTransactions} title="Purchases" />
             </Scene>
 
+          </Scene>
         </Router>
     );
 };
