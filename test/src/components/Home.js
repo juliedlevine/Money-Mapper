@@ -127,7 +127,7 @@ class Home extends React.Component {
                             <View style={styles.separator}></View>
                         </View>
                     )}
-                  />
+                 />
 
             </View>
         )
