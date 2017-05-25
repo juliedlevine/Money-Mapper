@@ -1,14 +1,10 @@
 import { combineReducers } from 'redux';
 import SettingsReducer from './SettingsReducer';
 import LoginReducer from './LoginReducer'
-
+import SubcategoryTransactionsReducer from './SubcategoryTransactionsReducer'
 
 export default combineReducers({
   auth: LoginReducer,
-  expenses: SettingsReducer
+  expenses: SettingsReducer,
+  transactionDetails: SubcategoryTransactionsReducer
 });
-
-// export default combineReducers({
-//   auth: HomeReducer,
-//   employeeForm: EmployeeFormReducer
-// });

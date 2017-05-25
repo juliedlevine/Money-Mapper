@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Settings from './components/Settings';
 import CreateAccount from './components/CreateAccount';
 import AddNewSubcategory from './components/AddNewSubcategory';
+import SubcategoryTransactions from './components/SubcategoryTransactions';
 import Home from './components/Home';
 
 const RouterComponent = () => {
@@ -16,9 +17,10 @@ const RouterComponent = () => {
             </Scene>
 
             <Scene key="main">
-                <Scene key="home" component={Home} title="Status" rightButtonImage={require("./components/Resources/settings2.png")} onRight={()=>{Actions.budgetConfig()}}/>
+                <Scene key="home" component={Home} title="Spending Summary" rightButtonImage={require("./components/Resources/settings2.png")} onRight={()=>{Actions.budgetConfig()}}/>
                 <Scene key="budgetConfig" component={Settings} title="Budget Configuration" />
                 <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
+                <Scene key="viewSubcategoryTransactions" component={SubcategoryTransactions} title="Purchases" />
             </Scene>
 
           </Scene>

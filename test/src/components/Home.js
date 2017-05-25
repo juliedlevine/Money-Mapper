@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ListView, ScrollView, TouchableHighlight, Modal } from 'react-native';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
-import { getExpenseData, updateAmount, updateCategorySelected } from '../actions';
+import { getExpenseData, updateAmount, updateCategorySelected, displaySubcategoryTransactionDetails } from '../actions';
 import { Button, CardSection, Card } from './common';
 
 
@@ -19,22 +19,21 @@ class Home extends React.Component {
         this.props.updateAmount(newValue, mainCategory, rowId, idx, subCategoryName);
     }
 
+    onClickDisplaySubcategoryDetails(subCategoryName, subCategoryId){
+      this.props.displaySubcategoryTransactionDetails(this.props.user.token, subCategoryName, subCategoryId);
+    }
+
     subcategories(subcategories, mainCategory, rowId) {
         let subCategoryRows = subcategories.map((subcategory, idx) => {
             let subCategoryName = Object.keys(subcategory)[0];
 
             // monthlyBudget needs to be either amount remaining for that category, or amount
             let monthlyBudget = this.props.expenses[rowId][mainCategory].subcategories[idx][subCategoryName].monthlyBudget;
+            let monthlySpent = this.props.expenses[rowId][mainCategory].subcategories[idx][subCategoryName].spent;
             return (
                 <View style={styles.container}>
-                    <Text style={styles.subcategory}>{subCategoryName}</Text>
-                    {/* <TextInput
-                        keyboardType='numeric'
-                        value={'$' + monthlyBudget}
-                        onChangeText={value => this.amountChanged(value, mainCategory, rowId, idx, subCategoryName)}
-                        style={styles.inputText}
-                        /> */}
-                    <Text style={styles.inputText}>{'$' + monthlyBudget}</Text>
+                    <Text onPress={() => this.onClickDisplaySubcategoryDetails(subCategoryName, subcategory[Object.keys(subcategory)[0]].id)} style={styles.subcategory}>{subCategoryName}</Text>
+                    <Text style={styles.inputText}>{'$' + monthlySpent + ' of $' + monthlyBudget}</Text>
                 </View>
             )
         })
@@ -50,6 +49,7 @@ class Home extends React.Component {
     renderRow(category, sectionId, rowId) {
         let mainCategory = Object.keys(category)[0];
         let mainCategoryBudget = this.props.expenses[rowId][mainCategory].monthlyBudget;
+        let mainCategorySpent = this.props.expenses[rowId][mainCategory].spent;
         let subcategories = this.props.expenses[rowId][mainCategory].subcategories;
         return (
             <View>
@@ -57,18 +57,11 @@ class Home extends React.Component {
                     <CardSection style={styles.header}>
                         <View style={styles.container}>
                             <Text style={styles.headerText}>{mainCategory.toUpperCase()}</Text>
-                            <Text style={styles.headerText}>${mainCategoryBudget}</Text>
+                            <Text style={styles.headerText}>{'$' + mainCategorySpent} of ${mainCategoryBudget}</Text>
                         </View>
                     </CardSection>
 
                     {this.subcategories(subcategories, mainCategory, rowId)}
-
-                    {/* <View style={styles.container}>
-                        <Text style={styles.add}>Add Item</Text>
-                        <TouchableHighlight onPress={()=> this.addNew(mainCategory)}>
-                            <Image source={require('./Resources/plus.png')} style={styles.plusIcon} />
-                        </TouchableHighlight>
-                    </View> */}
 
                 </Card>
             </View>
@@ -87,17 +80,19 @@ class Home extends React.Component {
           },0);
         },0);
 
-        const totalSpent = this.props.expenses.reduce((accum, category) =>{
+        let totalSpent = this.props.expenses.reduce((accum, category) =>{
           return accum + Number(category[Object.keys(category)[0]].spent);
         },0);
-
+        totalSpent = totalSpent.toFixed(2);
         const remaining = (totalMonthlyBudget - totalSpent).toFixed(2);
 
         return (
             <View>
                 <ListView
                     dataSource={this.dataSource}
+
                     renderRow={this.renderRow.bind(this)}
+
                     renderHeader={()=> (
                         <View style={styles.intro}>
                             <Text style={styles.statusText}>Hello {this.props.user.firstName}!</Text>
@@ -128,11 +123,13 @@ class Home extends React.Component {
 
                         </View>
                     )}
+
                     renderFooter={()=> (
                         <View>
                             <View style={styles.separator}></View>
                         </View>
                     )}
+                    
                   />
 
             </View>
@@ -188,7 +185,7 @@ const styles = {
         paddingBottom: 20,
     },
     inputText: {
-        width: 85,
+        width: 135,
         height: 25,
         marginTop: 10,
         marginBottom: 10,
@@ -196,7 +193,7 @@ const styles = {
         color: 'black',
         textAlign: 'right',
         paddingRight: 10,
-        fontFamily: 'Avenir',
+        fontFamily: 'Avenir'
     },
     statusText: {
         fontSize: 16,
@@ -235,4 +232,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { getExpenseData, updateAmount, updateCategorySelected })(Home);
+export default connect(mapStateToProps, { getExpenseData, updateAmount, updateCategorySelected, displaySubcategoryTransactionDetails })(Home);
