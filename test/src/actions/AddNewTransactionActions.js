@@ -1,6 +1,7 @@
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 import { UPDATE_TRANSACTION_DATE } from '../actions/types';
+import baseurl from '../url';
 
 
 // action dispatched when user clicks Done button on Add New Subcategory page
@@ -16,7 +17,7 @@ export const addNewTransaction = (token, date, subcategory_id, description, loca
             amount: amount
         };
 
-        const endpoint = "http://localhost:5007/api/addnewtransaction";
+        const endpoint = baseurl + "/api/addnewtransaction";
         console.log('Axios data', axiosData);
         axios.post(endpoint, axiosData)
             .then(response => {

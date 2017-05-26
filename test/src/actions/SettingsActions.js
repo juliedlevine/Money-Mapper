@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Actions, ActionConst } from 'react-native-router-flux';
 import { GET_EXPENSES, UPDATE_AMOUNT, UPDATE_CATEGORY_SELECTED, SAVE_SETTINGS } from './types';
+import baseurl from '../url';
 
 export const saveExpenseData = (token, expenses) => {
     console.log("entering saveExpenseData");
@@ -10,7 +11,7 @@ export const saveExpenseData = (token, expenses) => {
             token: token,
             expenses: expenses
         };
-        const endpoint = "http://localhost:5007/api/saveexpenses";
+        const endpoint = baseurl + "/api/saveexpenses";
         axios.post(endpoint, axiosData)
             .then(response => {
                 dispatch({
@@ -46,7 +47,7 @@ export const getExpenseData = (token) => {
             token: token,
             timeFrame: "thismonth"
         };
-        const endpoint = "http://localhost:5007/api/expenses2";
+        const endpoint = baseurl + "/api/expenses2";
         axios.post(endpoint, axiosData)
             .then(response => {
                 dispatch({

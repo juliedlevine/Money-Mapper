@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { GET_EXPENSES, UPDATE_AMOUNT, UPDATE_CATEGORY_SELECTED, DISPLAY_SUB_DETAILS } from './types';
+import baseurl from '../url';
 
 export const updateCategorySelected = (mainCategory) => {
     return {
@@ -15,7 +16,7 @@ export const getExpenseData = (token) => {
             token: token,
             timeFrame: "thismonth"
         };
-        const endpoint = "http://localhost:5007/api/expenses2";
+        const endpoint = baseurl + "/api/expenses2";
         axios.post(endpoint, axiosData)
             .then(response => {
 

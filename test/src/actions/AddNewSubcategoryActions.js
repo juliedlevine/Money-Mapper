@@ -1,5 +1,6 @@
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
+import baseurl from '../url';
 
 // action dispatched when user clicks Done button on Add New Subcategory page
 export const addNewSubcategory = (token, categoryName, subcategory, amount) => {
@@ -12,7 +13,7 @@ export const addNewSubcategory = (token, categoryName, subcategory, amount) => {
             amount: amount
         };
 
-        const endpoint = "http://localhost:5007/api/addnewsubcategory";
+        const endpoint = baseurl + '/api/addnewsubcategory';
 
         axios.post(endpoint, axiosData)
             .then(response => {

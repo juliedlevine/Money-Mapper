@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
 import { DISPLAY_SUB_DETAILS } from './types';
+import baseurl from '../url';
 
 export const displaySubcategoryTransactionDetails = (token, subCategoryName, subCategoryId) => {
     return (dispatch) => {
@@ -11,7 +12,7 @@ export const displaySubcategoryTransactionDetails = (token, subCategoryName, sub
           subcategoryname: subCategoryName,
           subcategoryid: subCategoryId
       };
-      const endpoint = "http://localhost:5007/api/subcategorytransactions";
+      const endpoint = baseurl + "/api/subcategorytransactions";
       axios.post(endpoint, axiosData)
           .then(response => {
               // console.log('response for transaction details: ', response.data);

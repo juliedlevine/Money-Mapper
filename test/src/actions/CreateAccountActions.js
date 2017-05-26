@@ -1,5 +1,6 @@
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
+import baseurl from '../url';
 
 import {
   LOGIN_USER_SUCCESS,
@@ -20,7 +21,7 @@ export const createUserAccount = (first, last, email, password) => {
           password: password
       };
 
-      const endpoint = "http://localhost:5007/api/user/signup";
+      const endpoint = baseurl + "/api/user/signup";
 
       axios.post(endpoint, axiosData)
       .then(response => {
