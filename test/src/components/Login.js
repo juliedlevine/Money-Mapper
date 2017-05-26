@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TextInput, TouchableHighlight } from 'react-native';
+import { Text, View, Image, TextInput, TouchableHighlight, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { loginFormUpdate, loginUser } from '../actions';
@@ -25,6 +25,7 @@ class Login extends Component {
     render() {
 
         return (
+            <ScrollView style={{ flex: 1 }}>
             <View style={styles.container}>
                 <Image source={require('./Resources/home.png')} style={styles.icon} />
                 <Text style={styles.container}>Welcome!</Text>
@@ -55,6 +56,7 @@ class Login extends Component {
                     <Text style={styles.buttonText}>Sign Up</Text>
                 </TouchableHighlight>
           </View>
+          </ScrollView>
         );
     }
 }

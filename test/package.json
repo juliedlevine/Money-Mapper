@@ -14,6 +14,7 @@
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",
     "react-native-datepicker": "^1.5.1",
+    "react-native-keyboardevents": "^0.4.5",
     "react-native-navigation": "^1.1.75",
     "react-native-router-flux": "^3.39.1",
     "react-navigation": "^1.0.0-beta.9",

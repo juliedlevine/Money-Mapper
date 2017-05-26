@@ -1,7 +1,7 @@
 console.disableYellowBox = true;
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Text, Image, TextInput, TouchableHighlight, DatePickerIOS, Picker, Item, KeyboardAvoidingView } from 'react-native';
+import { View, Text, Image, TextInput, TouchableHighlight, DatePickerIOS, Picker, Item, ScrollView, Keyboard } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { addNewTransaction } from '../actions';
 import { Button, CardSection, Card } from './common';
@@ -86,7 +86,7 @@ class AddNewSubcategory extends React.Component {
 
     render() {
         return (
-            <KeyboardAvoidingView style={styles.intro} behavior="position">
+            <ScrollView style={{ flex: 1 }}>
                 <Image source={require('./Resources/check.png')} style={styles.icon} />
                 <Text style={styles.headerText}>Add New Transaction {this.props.categorySelected}</Text>
                     <MyDatePicker />
@@ -145,7 +145,7 @@ class AddNewSubcategory extends React.Component {
                         <Text style={styles.buttonText}>Done</Text>
                     </TouchableHighlight>
                     <View style={{ height: 60 }} />
-            </KeyboardAvoidingView>
+            </ScrollView>
         )
     }
 }
@@ -202,6 +202,7 @@ const styles = {
         color: 'black'
     },
     intro: {
+        flex: 1,
         marginTop: 25,
         alignItems: 'center',
         fontFamily: 'Avenir',
