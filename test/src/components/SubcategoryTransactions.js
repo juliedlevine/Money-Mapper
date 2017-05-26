@@ -42,8 +42,8 @@ class ViewTransactions extends React.Component {
                     renderRow={this.renderRow.bind(this)}
                     renderHeader={()=> (
                         <View style={styles.intro}>
+                            <Image source={require('./Resources/atm.png')} style={styles.icon} />
                             <Text style={styles.statusText}>Transactions this Month</Text>
-                            <Image source={require('./Resources/piggy-bank.png')} style={styles.icon} />
 
                             <View style={styles.separator}></View>
 
@@ -120,11 +120,11 @@ const styles = {
         fontFamily: 'Avenir'
     },
     statusText: {
+        paddingTop: 5,
         fontSize: 16,
         fontFamily: 'Avenir',
     },
     header: {
-        backgroundColor: '#42f4bf',
         height: 40,
     },
     headerText: {

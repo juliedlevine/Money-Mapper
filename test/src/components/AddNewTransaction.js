@@ -36,10 +36,10 @@ class AddNewSubcategory extends React.Component {
 
     addNewClick() {
         let token = this.props.token;
-        let date = this.props.date;
+        let date;
         if (this.props.date === '') {
             let today = new Date;
-            let date = (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getFullYear(); 
+            date = (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getFullYear();
         } else {
             date = this.props.date;
         }
@@ -87,19 +87,21 @@ class AddNewSubcategory extends React.Component {
     render() {
         return (
             <View style={styles.intro}>
-                <Image source={require('./Resources/piggy-bank.png')} style={styles.icon} />
+                <Image source={require('./Resources/check.png')} style={styles.icon} />
                 <Text style={styles.headerText}>Add New Transaction {this.props.categorySelected}</Text>
                     <MyDatePicker />
 
                     {this.state.showPicker ?
                         <View>
                         <Picker
-                          style={{ width: 200 }}
+                          style={{ width: 310 }}
                           selectedValue={this.state.pickerValues}
                           onValueChange={this.onValueChange.bind(this)}>
                           {this.buildPickerList()}
                         </Picker>
-                        <Text style={styles.done} onPress={this.hidePicker.bind(this)}>Done</Text>
+                        <View style={styles.done}>
+                            <Text style={styles.doneText} onPress={this.hidePicker.bind(this)}>Make Selection</Text>
+                        </View>
                         </View>
                         :
 
@@ -149,16 +151,25 @@ class AddNewSubcategory extends React.Component {
 }
 const styles = {
     done: {
-        flex: 1,
-        alignSelf: 'stretch',
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: '#42f4bf',
-        fontFamily: 'Avenir',
-        color: '#42f4bf',
-        fontSize: 16,
         height: 45,
+        paddingLeft: 12,
+        padding: 12,
+        marginBottom: 10,
+        marginTop: 10,
+        borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: '#42f4bf',
+        backgroundColor: '#42f4bf',
+        borderRadius: 8,
+
+    },
+    doneText: {
+        fontSize: 16,
+        fontFamily: 'Avenir',
+        fontWeight: '600',
+        color: '#fff'
     },
     subcategory: {
         fontFamily: 'Avenir',

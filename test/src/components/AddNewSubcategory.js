@@ -35,7 +35,7 @@ class AddNewSubcategory extends React.Component {
     render() {
         return (
             <View style={styles.intro}>
-                <Image source={require('./Resources/piggy-bank.png')} style={styles.icon} />
+                <Image source={require('./Resources/money-bag.png')} style={styles.icon} />
                 <Text style={styles.headerText}>Add New Subcategory to {this.props.categorySelected}</Text>
                     <TextInput
                         style={styles.input}
