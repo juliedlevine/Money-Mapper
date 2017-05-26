@@ -21,7 +21,8 @@ export const addNewTransaction = (token, date, subcategory_id, description, loca
         axios.post(endpoint, axiosData)
             .then(response => {
                 // After everything is successful re-route the user to the settings page
-                Actions.main();
+                console.log("sending to home page");
+                Actions.home();
             })
             .catch(err => {
                 console.log('error: ', err);
