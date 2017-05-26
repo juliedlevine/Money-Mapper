@@ -17,7 +17,6 @@ export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
 
     case UPDATE_TRANSACTION_DATE:
-        console.log('Date in settings reducer', action.payload);
         return { ...state,
             transactionDate: action.payload
         }

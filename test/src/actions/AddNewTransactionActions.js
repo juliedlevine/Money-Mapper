@@ -17,7 +17,7 @@ export const addNewTransaction = (token, date, subcategory_id, description, loca
         };
 
         const endpoint = "http://localhost:5007/api/addnewtransaction";
-
+        console.log('Axios data', axiosData);
         axios.post(endpoint, axiosData)
             .then(response => {
                 // After everything is successful re-route the user to the settings page
@@ -30,7 +30,6 @@ export const addNewTransaction = (token, date, subcategory_id, description, loca
 };
 
 export const updateTransactionDate = (date) => {
-    console.log('Date in new Transaction actions file', date);
     return {
         type: UPDATE_TRANSACTION_DATE,
         payload: date

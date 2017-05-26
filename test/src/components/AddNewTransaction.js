@@ -11,12 +11,14 @@ class AddNewSubcategory extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            pickerValues: '',
             subcategory: '',
             subcategory_id: '',
             description: '',
             location: '',
             amount: '',
             showPicker: false,
+            subcategorySelected: false,
         }
     }
 
@@ -35,6 +37,12 @@ class AddNewSubcategory extends React.Component {
     addNewClick() {
         let token = this.props.token;
         let date = this.props.date;
+        if (this.props.date === '') {
+            let today = new Date;
+            let date = (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getFullYear(); 
+        } else {
+            date = this.props.date;
+        }
         let subcategory_id = this.state.subcategory_id;
         let description = this.state.description;
         let location = this.state.location;
@@ -42,9 +50,13 @@ class AddNewSubcategory extends React.Component {
         this.props.addNewTransaction(token, date, subcategory_id, description, location, amount);
     }
 
-    onValueChange(subcategory) {
+    onValueChange(subcategorySomething) {
+        let subcategoryName = subcategorySomething.split('::')[0];
+        let subcategory_id = subcategorySomething.split('::')[1];
         this.setState({
-            subcategory: subcategory
+            pickerValues: subcategorySomething,
+            subcategory_id: subcategory_id,
+            subcategory: subcategoryName,
         });
     };
 
@@ -52,9 +64,27 @@ class AddNewSubcategory extends React.Component {
         this.setState({ showPicker: true });
     }
 
+    hidePicker() {
+        this.setState({
+            showPicker: false,
+            subcategorySelected: true,
+        });
+    }
+
+    buildPickerList(){
+        let itemList = this.props.expenses.expenses.map(category => {
+            let categoryName = Object.keys(category)[0];
+            let arrSubcategories = category[categoryName].subcategories;
+            return arrSubcategories.map(objSubcategory => {
+                let subcategoryName = Object.keys(objSubcategory)[0];
+                let subcategoryId = objSubcategory[subcategoryName].id;
+                    return (<Item label={subcategoryName} value={subcategoryName +'::' + subcategoryId} />);
+                })
+            })
+        return itemList;
+    }
+
     render() {
-        console.log('local state', this.state);
-        console.log('overall state date', this.props.date);
         return (
             <View style={styles.intro}>
                 <Image source={require('./Resources/piggy-bank.png')} style={styles.icon} />
@@ -62,23 +92,27 @@ class AddNewSubcategory extends React.Component {
                     <MyDatePicker />
 
                     {this.state.showPicker ?
+                        <View>
                         <Picker
                           style={{ width: 200 }}
-                          selectedValue={this.state.subcategory}
+                          selectedValue={this.state.pickerValues}
                           onValueChange={this.onValueChange.bind(this)}>
-                          <Item label="Groceries" value="subcategory_id" />
-                          <Item label="Restaurants" value="subcategory_id" />
-                          <Item label="Test" value="subcategory_id" />
-                          <Item label="Test2" value="subcategory_id" />
-                          <Item label="Test3" value="subcategory_id" />
-                          <Item label="Test4" value="subcategory_id" />
-                          <Item label="Test5" value="subcategory_id" />
-                          <Item label="Test6" value="subcategory_id" />
-                        </Picker> :
+                          {this.buildPickerList()}
+                        </Picker>
+                        <Text style={styles.done} onPress={this.hidePicker.bind(this)}>Done</Text>
+                        </View>
+                        :
 
-                        <View>
-                            <Text onPress={this.showPicker.bind(this)}>Subcategory</Text>
-                        </View> }
+                        this.state.subcategorySelected ?
+                        <Text
+                            style={styles.subcategorySelected}
+                            onPress={this.showPicker.bind(this)}>{this.state.subcategory}</Text> :
+
+                        <Text
+                            style={styles.subcategory}
+                            onPress={this.showPicker.bind(this)}>Subcategory</Text>
+
+                    }
 
                     <TextInput
                         style={styles.input}
@@ -114,8 +148,50 @@ class AddNewSubcategory extends React.Component {
     }
 }
 const styles = {
+    done: {
+        flex: 1,
+        alignSelf: 'stretch',
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#42f4bf',
+        fontFamily: 'Avenir',
+        color: '#42f4bf',
+        fontSize: 16,
+        height: 45,
+    },
+    subcategory: {
+        fontFamily: 'Avenir',
+        height: 45,
+        paddingLeft: 12,
+        padding: 12,
+        marginBottom: 10,
+        marginTop: 10,
+        fontSize: 16,
+        borderWidth: 1,
+        borderColor: '#42f4bf',
+        borderRadius: 8,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        color: '#C7C7CD'
+    },
+    subcategorySelected: {
+        fontFamily: 'Avenir',
+        height: 45,
+        paddingLeft: 12,
+        padding: 12,
+        marginBottom: 10,
+        marginTop: 10,
+        fontSize: 16,
+        borderWidth: 1,
+        borderColor: '#42f4bf',
+        borderRadius: 8,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        color: 'black'
+    },
     intro: {
-        marginTop: 50,
+        marginTop: 25,
         alignItems: 'center',
         fontFamily: 'Avenir',
         padding: 30,
@@ -162,7 +238,8 @@ const styles = {
 const mapStateToProps = (state) => {
     return {
         token: state.auth.user.token,
-        date: state.expenses.transactionDate
+        date: state.expenses.transactionDate,
+        expenses: state.expenses
     };
 };
 
