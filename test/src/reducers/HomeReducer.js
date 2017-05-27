@@ -2,7 +2,7 @@ import deepcopy from 'deepcopy';
 import {
     GET_EXPENSES,
     UPDATE_AMOUNT,
-    UPDATE_CATEGORY_SELECTED
+    UPDATE_CATEGORY_SELECTED,
 } from '../actions/types';
 
 const INITIAL_STATE = {

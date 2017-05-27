@@ -1,7 +1,7 @@
 console.disableYellowBox = true;
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Text, Image, TextInput, TouchableHighlight, DatePickerIOS, Picker, Item, KeyboardAvoidingView } from 'react-native';
+import { View, Text, Image, TextInput, TouchableHighlight, DatePickerIOS, Picker, Item, ScrollView, Keyboard, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { addNewTransaction } from '../actions';
 import { Button, CardSection, Card } from './common';
@@ -19,7 +19,27 @@ class AddNewSubcategory extends React.Component {
             amount: '',
             showPicker: false,
             subcategorySelected: false,
+            keyboardOffset: 0
         }
+    }
+
+    componentDidMount() {
+      _keyboardWillShowSubscription = DeviceEventEmitter.addListener('keyboardWillShow', (e) => this._keyboardWillShow(e));
+      _keyboardWillHideSubscription = DeviceEventEmitter.addListener('keyboardWillHide', (e) => this._keyboardWillHide(e));
+    }
+
+    componentWillUnmount() {
+      _keyboardWillShowSubscription.remove();
+      _keyboardWillHideSubscription.remove();
+    }
+
+
+    _keyboardWillShow(e) {
+      this.setState({ keyboardOffset: e.endCoordinates.height });
+    }
+
+    _keyboardWillHide(e) {
+      this.setState({ keyboardOffset: 0 });
     }
 
     updateAmount(text) {
@@ -86,7 +106,8 @@ class AddNewSubcategory extends React.Component {
 
     render() {
         return (
-            <View style={styles.intro}>
+            <ScrollView style={{ marginBottom: this.state.keyboardOffset }}>
+                <View style={styles.intro}>
                 <Image source={require('./Resources/check.png')} style={styles.icon} />
                 <Text style={styles.headerText}>Add New Transaction {this.props.categorySelected}</Text>
                     <MyDatePicker />
@@ -144,8 +165,8 @@ class AddNewSubcategory extends React.Component {
                         underlayColor='#99d9f4'>
                         <Text style={styles.buttonText}>Done</Text>
                     </TouchableHighlight>
-
-            </View>
+                </View>
+            </ScrollView>
         )
     }
 }

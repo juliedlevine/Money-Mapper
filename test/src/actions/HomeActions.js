@@ -1,5 +1,6 @@
+import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
-import { GET_EXPENSES, UPDATE_AMOUNT, UPDATE_CATEGORY_SELECTED, DISPLAY_SUB_DETAILS } from './types';
+import { GET_EXPENSES, UPDATE_AMOUNT, UPDATE_CATEGORY_SELECTED, DISPLAY_SUB_DETAILS, LOGOUT } from './types';
 import baseurl from '../url';
 
 export const updateCategorySelected = (mainCategory) => {
@@ -41,5 +42,13 @@ export const updateAmount = (value, mainCategory, rowId, idx, subCategoryName) =
             idx: idx,
             subCategoryName: subCategoryName
         }
+    }
+}
+
+// this isnt working. Supposed to get sent over to Login reducer to set state back to inital state
+export const logout = () => {
+    console.log('Home actions')
+    return {
+        type: LOGOUT
     }
 }

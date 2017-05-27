@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ListView, ScrollView, TouchableHighlight, Modal } from 'react-native';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
-import { getExpenseData, updateAmount, updateCategorySelected, displaySubcategoryTransactionDetails } from '../actions';
+import { getExpenseData, updateAmount, updateCategorySelected, displaySubcategoryTransactionDetails, logout } from '../actions';
 import { Button, CardSection, Card } from './common';
 
 
@@ -44,6 +44,12 @@ class Home extends React.Component {
     addNew(mainCategory) {
         this.props.updateCategorySelected(mainCategory);
         Actions.addNewSubcategory();
+    }
+
+    logoutClick() {
+        // Can't get this to work - says cannot read property logout of undefined
+        // this.props.logout();
+        Actions.auth();
     }
 
     renderRow(category, sectionId, rowId) {
@@ -126,6 +132,8 @@ class Home extends React.Component {
 
                     renderFooter={()=> (
                         <View>
+                            <View style={styles.separator}></View>
+                            <Button onPress={this.logoutClick}>Logout</Button>
                             <View style={styles.separator}></View>
                         </View>
                     )}
@@ -231,4 +239,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { getExpenseData, updateAmount, updateCategorySelected, displaySubcategoryTransactionDetails })(Home);
+export default connect(mapStateToProps, { getExpenseData, updateAmount, updateCategorySelected, displaySubcategoryTransactionDetails, logout })(Home);
