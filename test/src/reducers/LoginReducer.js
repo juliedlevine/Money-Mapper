@@ -6,11 +6,18 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  email: 'juliemdyer@gmail.com',
-  password: 'yes',
+  email: '',
+  password: '',
   user: null,
   loading: false
 };
+
+// const INITIAL_STATE = {
+//   email: 'juliemdyer@gmail.com',
+//   password: 'yes',
+//   user: null,
+//   loading: false
+// };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {

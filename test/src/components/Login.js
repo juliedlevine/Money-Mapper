@@ -1,11 +1,41 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TextInput, TouchableHighlight, ScrollView } from 'react-native';
+import { Text, View, Image, TextInput, TouchableHighlight, ScrollView, DeviceEventEmitter } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { loginFormUpdate, loginUser } from '../actions';
 import { Spinner } from './common';
 
 class Login extends Component {
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        keyboardOffset: 0
+      };
+    }
+
+
+
+    componentDidMount() {
+      _keyboardWillShowSubscription = DeviceEventEmitter.addListener('keyboardWillShow', (e) => this._keyboardWillShow(e));
+      _keyboardWillHideSubscription = DeviceEventEmitter.addListener('keyboardWillHide', (e) => this._keyboardWillHide(e));
+    }
+
+    componentWillUnmount() {
+      _keyboardWillShowSubscription.remove();
+      _keyboardWillHideSubscription.remove();
+    }
+
+
+    _keyboardWillShow(e) {
+      this.setState({ keyboardOffset: e.endCoordinates.height });
+    }
+
+    _keyboardWillHide(e) {
+      this.setState({ keyboardOffset: 0 });
+    }
+
+
 
     signIn() {
         this.props.loginUser(this.props.email, this.props.password);
@@ -23,9 +53,8 @@ class Login extends Component {
   }
 
     render() {
-
         return (
-            <ScrollView style={{ flex: 1 }}>
+            <ScrollView style={{ marginBottom: this.state.keyboardOffset }} >
             <View style={styles.container}>
                 <Image source={require('./Resources/home.png')} style={styles.icon} />
                 <Text style={styles.container}>Welcome!</Text>
@@ -56,7 +85,7 @@ class Login extends Component {
                     <Text style={styles.buttonText}>Sign Up</Text>
                 </TouchableHighlight>
           </View>
-          </ScrollView>
+        </ScrollView>
         );
     }
 }
