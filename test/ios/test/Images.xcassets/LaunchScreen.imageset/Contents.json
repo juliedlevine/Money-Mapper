@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "piggy.png",
       "scale" : "1x"
     },
     {
