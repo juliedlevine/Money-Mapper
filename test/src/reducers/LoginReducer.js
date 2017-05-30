@@ -23,12 +23,10 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
 
-    // this isnt working
     case LOGOUT:
         return { ...state,
             email: '',
             password: '',
-            user: null,
             loading: false
         }
 

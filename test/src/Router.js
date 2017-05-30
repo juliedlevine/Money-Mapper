@@ -7,6 +7,7 @@ import AddNewSubcategory from './components/AddNewSubcategory';
 import SubcategoryTransactions from './components/SubcategoryTransactions';
 import Home from './components/Home';
 import AddNewTransaction from './components/AddNewTransaction';
+import Map from './components/Map';
 
 const RouterComponent = () => {
     return (
@@ -25,6 +26,7 @@ const RouterComponent = () => {
                     leftButtonImage={require("./components/Resources/add.png")} onLeft={()=>{Actions.addNewTransaction()}}
                     rightButtonImage={require("./components/Resources/settings2.png")} onRight={()=>{Actions.budgetConfig()}}
                 />
+                <Scene key="map" component={Map} title="Map View" />
                 <Scene key="budgetConfig" component={Settings} title="Budget Configuration" />
                 <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
                 <Scene key="viewSubcategoryTransactions" component={SubcategoryTransactions} title="Purchases" />

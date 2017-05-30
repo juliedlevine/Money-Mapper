@@ -7,7 +7,6 @@ import { Actions } from 'react-native-router-flux';
 import { getExpenseData, updateAmount, updateCategorySelected, displaySubcategoryTransactionDetails, logout } from '../actions';
 import { Button, CardSection, Card } from './common';
 
-
 class Home extends React.Component {
 
     componentDidMount() {
@@ -47,9 +46,11 @@ class Home extends React.Component {
     }
 
     logoutClick() {
-        // Can't get this to work - says cannot read property logout of undefined
-        // this.props.logout();
-        Actions.auth();
+        this.props.logout();
+    }
+
+    mapClick() {
+        Actions.map();
     }
 
     renderRow(category, sectionId, rowId) {
@@ -125,6 +126,13 @@ class Home extends React.Component {
                                 </View>
                             </CardSection>
 
+                            <CardSection>
+                                <View style={styles.totals}>
+                                    <Text onPress={()=> this.mapClick()} style={styles.totalsText}>Map View</Text>
+                                    <Image source={require('./Resources/maps-and-flags.png')} style={styles.map} />
+                                </View>
+                            </CardSection>
+
                             <View style={styles.separator}></View>
 
                         </View>
@@ -133,7 +141,7 @@ class Home extends React.Component {
                     renderFooter={()=> (
                         <View>
                             <View style={styles.separator}></View>
-                            <Button onPress={this.logoutClick}>Logout</Button>
+                            <Button onPress={()=> this.logoutClick()}>Logout</Button>
                             <View style={styles.separator}></View>
                         </View>
                     )}
@@ -154,6 +162,11 @@ const styles = {
         marginBottom: 30,
         width: 40,
         height: 40,
+    },
+    map: {
+        width: 25,
+        height: 25,
+        marginRight: 10,
     },
     plusIcon: {
         width: 20,
