@@ -1,7 +1,7 @@
 console.disableYellowBox = true;
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ListView, ScrollView, TouchableHighlight, Modal } from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ListView, ScrollView, TouchableHighlight, Modal, TouchableWithoutFeedback } from 'react-native';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
 import { getExpenseData, updateAmount, updateCategorySelected, displaySubcategoryTransactionDetails, logout } from '../actions';
@@ -50,6 +50,7 @@ class Home extends React.Component {
     }
 
     mapClick() {
+        console.log('clicked');
         Actions.map();
     }
 
@@ -129,7 +130,9 @@ class Home extends React.Component {
                             <CardSection>
                                 <View style={styles.totals}>
                                     <Text onPress={()=> this.mapClick()} style={styles.totalsText}>Map View</Text>
-                                    <Image source={require('./Resources/maps-and-flags.png')} style={styles.map} />
+                                    <TouchableWithoutFeedback onPress={()=> this.mapClick()}>
+                                    <Image source={require('./Resources/map.png')} style={styles.map} />
+                                    </TouchableWithoutFeedback>
                                 </View>
                             </CardSection>
 
@@ -164,8 +167,8 @@ const styles = {
         height: 40,
     },
     map: {
-        width: 25,
-        height: 25,
+        width: 27,
+        height: 27,
         marginRight: 10,
     },
     plusIcon: {

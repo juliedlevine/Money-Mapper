@@ -2,7 +2,7 @@ console.disableYellowBox = true;
 import React from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import MapView from 'react-native-maps';
 import axios from 'axios';
 
@@ -45,7 +45,16 @@ class Map extends React.Component {
     }
 
     createMarkers(){
-      let markers = this.state.purchases.map(purchase => <MapView.Marker coordinate={{latitude: purchase.latitude, longitude: purchase.longitude }} title={purchase.description} description={purchase.amount} image={require('./Resources/maps-and-flags.png')} />);
+      let markers = this.state.purchases.map(purchase =>
+          <MapView.Marker
+            coordinate={{latitude: purchase.latitude, longitude: purchase.longitude }}
+            title={purchase.description}
+            description={'$'+ purchase.amount}
+            image={require('./Resources/chat.png')}>
+            <View style={styles.marker}>
+                <Text style={styles.textStyle}>${Math.round(purchase.amount)}</Text>
+            </View>
+          </MapView.Marker>);
       return markers;
 
     }
@@ -55,11 +64,11 @@ class Map extends React.Component {
         return (
             <View style={styles.container}>
                 <MapView
+                    showsUserLocation={true}
                     style={styles.map}
                     initialRegion={this.state.initialLocation}
                     region={this.state.initialLocation}
-                    showsMyLocationButton="true"
-                    rotateEnabled="false"
+                    rotateEnabled={false}
                     >
                     {this.createMarkers()}
                   {/* <MapView.Marker
@@ -105,6 +114,19 @@ const styles = {
     right: 0,
     bottom: 0,
   },
+  marker: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingTop: 10,
+      paddingLeft: 7,
+  },
+  textStyle: {
+      fontFamily: 'Avenir',
+      fontWeight: '800',
+      color: 'white',
+      fontSize: 17,
+  }
 };
 
 const mapStateToProps = (state) => {

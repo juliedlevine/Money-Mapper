@@ -40,6 +40,7 @@
 		62B402BF38344A21813F0B4A /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CECC40AF8EE44D54B81E964A /* libAirMaps.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		E31B76841EDDEB6800BDBA60 /* ios in Resources */ = {isa = PBXBuildFile; fileRef = E31B76831EDDEB6800BDBA60 /* ios */; };
+		E31B76AC1EDF027400BDBA60 /* atlanta.gpx in Resources */ = {isa = PBXBuildFile; fileRef = E31B76AB1EDF027400BDBA60 /* atlanta.gpx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,6 +272,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		CECC40AF8EE44D54B81E964A /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		E31B76831EDDEB6800BDBA60 /* ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ios; path = "../node_modules/react-native-maps/lib/ios"; sourceTree = "<group>"; };
+		E31B76AB1EDF027400BDBA60 /* atlanta.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = atlanta.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -483,6 +485,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				E31B76AB1EDF027400BDBA60 /* atlanta.gpx */,
 				5F6450451EDDA84A00A23030 /* LaunchScreen-2.png */,
 				13B07FAE1A68108700A75B9A /* test */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -895,6 +898,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				5F6450461EDDA84A00A23030 /* LaunchScreen-2.png in Resources */,
 				E31B76841EDDEB6800BDBA60 /* ios in Resources */,
+				E31B76AC1EDF027400BDBA60 /* atlanta.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

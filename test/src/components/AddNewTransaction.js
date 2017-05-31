@@ -19,7 +19,9 @@ class AddNewSubcategory extends React.Component {
             amount: '',
             showPicker: false,
             subcategorySelected: false,
-            keyboardOffset: 0
+            keyboardOffset: 0,
+            message: '',
+            buttonDisabled: false
         }
     }
 
@@ -39,19 +41,19 @@ class AddNewSubcategory extends React.Component {
     }
 
     _keyboardWillHide(e) {
-      this.setState({ keyboardOffset: 0 });
+      this.setState({ keyboardOffset: 0, message: '', buttonDisabled: false });
     }
 
     updateAmount(text) {
-        this.setState({ amount: text })
+        this.setState({ amount: text, message: '', buttonDisabled: false  })
     }
 
     updateLocation(text) {
-        this.setState({ location: text })
+        this.setState({ location: text, message: '', buttonDisabled: false  })
     }
 
     updateDescription(text) {
-        this.setState({ description: text })
+        this.setState({ description: text, message: '', buttonDisabled: false  })
     }
 
     addNewClick() {
@@ -67,13 +69,22 @@ class AddNewSubcategory extends React.Component {
         let description = this.state.description;
         let location = this.state.location;
         let amount = this.state.amount;
-        this.props.addNewTransaction(token, date, subcategory_id, description, location, amount);
+        if (subcategory_id === '' || description === '' || amount === '') {
+            this.setState({
+                message: 'Please fill out all the required fields.',
+                buttonDisabled: true
+            })
+        } else {
+            this.props.addNewTransaction(token, date, subcategory_id, description, location, amount);
+        }
     }
 
     onValueChange(subcategorySomething) {
         let subcategoryName = subcategorySomething.split('::')[0];
         let subcategory_id = subcategorySomething.split('::')[1];
         this.setState({
+            message: '',
+            buttonDisabled: false,
             pickerValues: subcategorySomething,
             subcategory_id: subcategory_id,
             subcategory: subcategoryName,
@@ -159,18 +170,26 @@ class AddNewSubcategory extends React.Component {
                         autoCapitalize={'none'}
                         keyboardType='numeric'
                         value={this.state.amount} />
+                    <Text style={styles.error}>{this.state.message}</Text>
                     <TouchableHighlight
+                        disabled={this.state.buttonDisabled}
                         style={styles.button}
                         onPress={this.addNewClick.bind(this)}
                         underlayColor='#99d9f4'>
                         <Text style={styles.buttonText}>Done</Text>
                     </TouchableHighlight>
+
                 </View>
             </ScrollView>
         )
     }
 }
 const styles = {
+    error: {
+        color: 'red',
+        fontSize: 17,
+        paddingBottom: 10,
+    },
     done: {
         height: 45,
         paddingLeft: 12,
