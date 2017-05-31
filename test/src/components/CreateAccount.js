@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, Button, Image, TouchableHighlight, TextInput, ScrollView } from 'react-native';
+import { AppRegistry, Text, View, Button, Image, TouchableHighlight, TextInput, ScrollView, DeviceEventEmitter } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { createUserAccount } from '../actions';
@@ -15,7 +15,26 @@ class Signup extends Component {
             password: '',
             confirm: '',
             error: '',
+            keyboardOffset: 0
         };
+    }
+
+    componentDidMount() {
+      _keyboardWillShowSubscription = DeviceEventEmitter.addListener('keyboardWillShow', (e) => this._keyboardWillShow(e));
+      _keyboardWillHideSubscription = DeviceEventEmitter.addListener('keyboardWillHide', (e) => this._keyboardWillHide(e));
+    }
+
+    componentWillUnmount() {
+      _keyboardWillShowSubscription.remove();
+      _keyboardWillHideSubscription.remove();
+    }
+
+    _keyboardWillShow(e) {
+      this.setState({ keyboardOffset: e.endCoordinates.height });
+    }
+
+    _keyboardWillHide(e) {
+      this.setState({ keyboardOffset: 0 });
     }
 
     first(event) {
@@ -58,7 +77,7 @@ class Signup extends Component {
 
     render() {
         return (
-            <ScrollView style={{ flex: 1 }}>
+            <ScrollView style={{ flex: 1, marginBottom: this.state.keyboardOffset }}>
             <View style={styles.container}>
                 <Image source={require('./Resources/id-card.png')} style={styles.icon} />
                 <Text style={styles.container}>Welcome! Please Fill out all fields.</Text>

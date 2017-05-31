@@ -26,8 +26,9 @@ const RouterComponent = () => {
                     leftButtonImage={require("./components/Resources/add.png")} onLeft={()=>{Actions.addNewTransaction()}}
                     rightButtonImage={require("./components/Resources/settings2.png")} onRight={()=>{Actions.budgetConfig()}}
                 />
-                <Scene key="map" component={Map} title="Map View" />
+
                 <Scene key="budgetConfig" component={Settings} title="Budget Configuration" />
+                <Scene key="map" component={Map} title="Map View" />
                 <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
                 <Scene key="viewSubcategoryTransactions" component={SubcategoryTransactions} title="Purchases" />
                 <Scene key="addNewTransaction" title="Add New Transaction" component={AddNewTransaction} />

@@ -43,13 +43,11 @@ class Settings extends React.Component {
     addNew(mainCategory) {
         this.props.updateCategorySelected(mainCategory);
         Actions.addNewSubcategory();
+        this.props.saveExpenseData(this.props.user.token, this.props.expenses, 'save');
     }
 
     saveChanges(){
-      console.log('saving changes');
-      console.log('token: ', this.props.user.token);
-      console.log('expenses: ', this.props.expenses);
-      this.props.saveExpenseData(this.props.user.token, this.props.expenses);
+      this.props.saveExpenseData(this.props.user.token, this.props.expenses, 'done');
     }
 
     renderRow(category, sectionId, rowId) {

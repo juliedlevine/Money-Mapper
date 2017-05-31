@@ -1,6 +1,6 @@
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import axios from 'axios';
-import { GET_EXPENSES, UPDATE_AMOUNT, UPDATE_CATEGORY_SELECTED, DISPLAY_SUB_DETAILS, LOGOUT } from './types';
+import { GET_EXPENSES, UPDATE_AMOUNT, UPDATE_CATEGORY_SELECTED, DISPLAY_SUB_DETAILS, LOGOUT, SAVE_SETTINGS } from './types';
 import baseurl from '../url';
 
 export const updateCategorySelected = (mainCategory) => {
@@ -9,6 +9,34 @@ export const updateCategorySelected = (mainCategory) => {
         payload: mainCategory
     }
 }
+
+export const saveExpenseData = (token, expenses, finishAction) => {
+    return (dispatch) => {
+
+        const axiosData = {
+            token: token,
+            expenses: expenses
+        };
+        const endpoint = baseurl + "/api/saveexpenses";
+        axios.post(endpoint, axiosData)
+            .then(response => {
+                dispatch({
+                    type: SAVE_SETTINGS,
+                    payload: response.data
+                });
+            if (finishAction === 'done') {
+                saveExpenseDataComplete();
+            }
+        })
+        .catch(err => {
+            console.log('error retrieving expenses: ', err);
+        });
+    };
+};
+
+const saveExpenseDataComplete= () => {
+  Actions.home({type: ActionConst.RESET});
+};
 
 export const getExpenseData = (token) => {
     return (dispatch) => {

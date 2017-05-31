@@ -208,7 +208,7 @@ const styles = {
         paddingBottom: 20,
     },
     inputText: {
-        width: 135,
+        width: 235,
         height: 25,
         marginTop: 10,
         marginBottom: 10,

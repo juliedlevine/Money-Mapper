@@ -1,4 +1,4 @@
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import axios from 'axios';
 import baseurl from '../url';
 
@@ -18,7 +18,7 @@ export const addNewSubcategory = (token, categoryName, subcategory, amount) => {
         axios.post(endpoint, axiosData)
             .then(response => {
                 // After everything is successful re-route the user to the settings page
-                Actions.budgetConfig();
+                Actions.budgetConfig({type: ActionConst.RESET});
             })
             .catch(err => {
                 console.log('error: ', err);

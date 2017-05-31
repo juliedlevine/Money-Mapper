@@ -96,6 +96,13 @@ class AddNewSubcategory extends React.Component {
     }
 
     hidePicker() {
+        let subcategory_id = this.props.expenses.expenses[0].Food.subcategories[0].Restaurants.id;
+        if (this.state.subcategory === '') {
+            this.setState({
+                subcategory: 'Restaurants',
+                subcategory_id: subcategory_id,
+            })
+        }
         this.setState({
             showPicker: false,
             subcategorySelected: true,

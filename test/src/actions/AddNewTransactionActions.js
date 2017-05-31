@@ -1,4 +1,4 @@
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import axios from 'axios';
 import { UPDATE_TRANSACTION_DATE } from '../actions/types';
 import baseurl from '../url';
@@ -21,8 +21,8 @@ export const addNewTransaction = (token, date, subcategory_id, description, loca
         console.log('Axios data', axiosData);
         axios.post(endpoint, axiosData)
             .then(response => {
-                // After everything is successful re-route the user to the settings page
-                Actions.home();
+                // After everything is successful re-route the user to the home page
+                Actions.home({type: ActionConst.RESET});
             })
             .catch(err => {
                 console.log('error: ', err);

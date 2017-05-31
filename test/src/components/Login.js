@@ -14,8 +14,6 @@ class Login extends Component {
       };
     }
 
-
-
     componentDidMount() {
       _keyboardWillShowSubscription = DeviceEventEmitter.addListener('keyboardWillShow', (e) => this._keyboardWillShow(e));
       _keyboardWillHideSubscription = DeviceEventEmitter.addListener('keyboardWillHide', (e) => this._keyboardWillHide(e));
@@ -34,8 +32,6 @@ class Login extends Component {
     _keyboardWillHide(e) {
       this.setState({ keyboardOffset: 0 });
     }
-
-
 
     signIn() {
         this.props.loginUser(this.props.email, this.props.password);
