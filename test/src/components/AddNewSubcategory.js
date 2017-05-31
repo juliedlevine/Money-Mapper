@@ -42,7 +42,7 @@ class AddNewSubcategory extends React.Component {
                         placeholder='Subcategory Name'
                         onChangeText={text => this.updateName(text)}
                         autoCorrect={false}
-                        autoCapitalize={'none'}
+                        autoCapitalize={'words'}
                         value={this.state.name} />
                     <TextInput
                         style={styles.input}

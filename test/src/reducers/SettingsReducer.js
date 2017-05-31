@@ -44,22 +44,18 @@ export default (state = INITIAL_STATE, action) => {
         let idx = action.payload.idx;
         let value = action.payload.value;
         let subCategoryName = action.payload.subCategoryName;
-
         let newExpenses = deepcopy(state.expenses);
-
         newExpenses[rowId][mainCategory].subcategories[idx][subCategoryName].monthlyBudget = value;
         const subcategories = newExpenses[rowId][mainCategory].subcategories;
         const newMonthlyBudget = subcategories.reduce((accum, subcat) => {
           return accum + Number(subcat[Object.keys(subcat)[0]].monthlyBudget);
         },0);
         newExpenses[rowId][mainCategory].monthlyBudget = Number(newMonthlyBudget);
-
         return { ...state,
             expenses: newExpenses
         }
 
     case SAVE_SETTINGS:
-
         return state;
 
     default:

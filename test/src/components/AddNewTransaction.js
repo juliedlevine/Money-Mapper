@@ -8,14 +8,6 @@ import { Button, CardSection, Card } from './common';
 import MyDatePicker from './DatePicker';
 import LocationSearch from './LocationSearch';
 
-// <TextInput
-//     style={styles.input}
-//     placeholder='Location (leave blank if none)'
-//     onChangeText={text => this.updateLocation(text)}
-//     autoCorrect={false}
-//     autoCapitalize={'none'}
-//     value={this.state.merchant} />
-
 class AddNewSubcategory extends React.Component {
     constructor(props) {
         super(props);
@@ -104,10 +96,10 @@ class AddNewSubcategory extends React.Component {
     }
 
     hidePicker() {
-        let subcategory_id = this.props.expenses.expenses[0].Food.subcategories[0].Restaurants.id;
+        let subcategory_id = this.props.expenses.expenses[0].Food.subcategories[0].Groceries.id;
         if (this.state.subcategory === '') {
             this.setState({
-                subcategory: 'Restaurants',
+                subcategory: 'Groceries',
                 subcategory_id: subcategory_id,
             })
         }
@@ -312,7 +304,6 @@ const styles = {
 }
 
 const mapStateToProps = (state) => {
-    console.log('State:', state);
     return {
         token: state.auth.user.token,
         date: state.expenses.transactionDate,

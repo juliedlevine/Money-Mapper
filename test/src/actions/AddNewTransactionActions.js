@@ -22,6 +22,7 @@ export const addNewTransaction = (token, date, subcategory_id, description, loca
         axios.post(endpoint, axiosData)
             .then(response => {
                 // After everything is successful re-route the user to the home page
+                getExpenseData(token);
                 Actions.home({type: ActionConst.RESET});
             })
             .catch(err => {
@@ -43,3 +44,25 @@ export const updateLocation = (location) => {
         payload: location
     }
 }
+
+const getExpenseData = (token) => {
+    return (dispatch) => {
+
+        const axiosData = {
+            token: token,
+            timeFrame: "thismonth"
+        };
+        const endpoint = baseurl + "/api/expenses2";
+        axios.post(endpoint, axiosData)
+            .then(response => {
+
+                dispatch({
+                    type: GET_EXPENSES,
+                    payload: response.data
+                });
+        })
+        .catch(err => {
+            console.log('error retrieving expenses: ', err);
+        });
+    };
+};

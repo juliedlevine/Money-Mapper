@@ -85,26 +85,31 @@ class Signup extends Component {
                     style={styles.searchInput}
                     placeholder='First Name'
                     onChange={this.first.bind(this)}
+                    autoCorrect={false}
                     value={this.state.first} />
                 <TextInput
                     style={styles.searchInput}
                     placeholder='Last Name'
+                    autoCorrect={false}
                     onChange={this.last.bind(this)}
                     value={this.state.last} />
                 <TextInput
                     style={styles.searchInput}
                     placeholder='Email'
+                    autoCorrect={false}
                     onChange={this.email.bind(this)}
                     value={this.state.email} />
                 <TextInput
                     style={styles.searchInput}
                     placeholder='Password'
+                    autoCorrect={false}
                     onChangeText={text => this.password(text)}
                     secureTextEntry={true}
                     value={this.state.password} />
                 <TextInput
                     style={styles.searchInput}
                     placeholder='Confirm password'
+                    autoCorrect={false}
                     onChangeText={text => this.confirm(text)}
                     secureTextEntry={true}
                     value={this.state.confirm} />

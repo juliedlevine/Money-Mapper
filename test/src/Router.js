@@ -12,29 +12,30 @@ import Map from './components/Map';
 const RouterComponent = () => {
     return (
         <Router navigationBarStyle={styles.navBar} titleStyle={styles.navTitle} sceneStyle={styles.routerScene} barButtonIconStyle={{ tintColor: 'white' }}>
-          <Scene key="root">
-            <Scene key="auth">
-                <Scene key="login" component={Login} title="Money Mapper" />
-                <Scene key="signup" component={CreateAccount} title="Sign Up" />
+
+            <Scene key="root">
+
+                <Scene key="auth">
+                    <Scene key="login" component={Login} title="Money Mapper" />
+                    <Scene key="signup" component={CreateAccount} title="Sign Up" />
+                </Scene>
+
+                <Scene key="main">
+                    <Scene key="home"
+                        component={Home}
+                        title="Spending Summary"
+                        leftButtonImage={require("./components/Resources/add.png")} onLeft={()=>{Actions.addNewTransaction()}}
+                        rightButtonImage={require("./components/Resources/settings2.png")} onRight={()=>{Actions.budgetConfig()}}
+                    />
+                    <Scene key="budgetConfig" component={Settings} title="Budget Configuration" />
+                    <Scene key="map" component={Map} title="Map View" />
+                    <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
+                    <Scene key="viewSubcategoryTransactions" component={SubcategoryTransactions} title="Purchases" />
+                    <Scene key="addNewTransaction" title="Add New Transaction" component={AddNewTransaction} />
+                </Scene>
+
             </Scene>
 
-            <Scene key="main">
-
-                <Scene key="home"
-                    component={Home}
-                    title="Spending Summary"
-                    leftButtonImage={require("./components/Resources/add.png")} onLeft={()=>{Actions.addNewTransaction()}}
-                    rightButtonImage={require("./components/Resources/settings2.png")} onRight={()=>{Actions.budgetConfig()}}
-                />
-
-                <Scene key="budgetConfig" component={Settings} title="Budget Configuration" />
-                <Scene key="map" component={Map} title="Map View" />
-                <Scene key="addNewSubcategory" component={AddNewSubcategory} title="New Subcategory" />
-                <Scene key="viewSubcategoryTransactions" component={SubcategoryTransactions} title="Purchases" />
-                <Scene key="addNewTransaction" title="Add New Transaction" component={AddNewTransaction} />
-            </Scene>
-
-          </Scene>
         </Router>
     );
 };
