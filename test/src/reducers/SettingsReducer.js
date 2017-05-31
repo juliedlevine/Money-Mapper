@@ -5,12 +5,14 @@ import {
     UPDATE_CATEGORY_SELECTED,
     SAVE_SETTINGS,
     UPDATE_TRANSACTION_DATE,
+    UPDATE_LOCATION
 } from '../actions/types';
 
 const INITIAL_STATE = {
   expenses: [],
   categorySelected: '',
-  transactionDate: ''
+  transactionDate: '',
+  location: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -19,6 +21,11 @@ export default (state = INITIAL_STATE, action) => {
     case UPDATE_TRANSACTION_DATE:
         return { ...state,
             transactionDate: action.payload
+        }
+
+    case UPDATE_LOCATION:
+        return { ...state,
+            location: action.payload
         }
 
     case GET_EXPENSES:

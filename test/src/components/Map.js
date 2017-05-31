@@ -116,16 +116,14 @@ const styles = {
   },
   marker: {
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      paddingTop: 10,
-      paddingLeft: 7,
   },
   textStyle: {
       fontFamily: 'Avenir',
       fontWeight: '800',
       color: 'white',
       fontSize: 17,
+      paddingTop: 9,
+      paddingLeft: 5,
   }
 };
 

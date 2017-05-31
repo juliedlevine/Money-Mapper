@@ -1,6 +1,6 @@
 import { Actions, ActionConst } from 'react-native-router-flux';
 import axios from 'axios';
-import { UPDATE_TRANSACTION_DATE } from '../actions/types';
+import { UPDATE_TRANSACTION_DATE, UPDATE_LOCATION } from '../actions/types';
 import baseurl from '../url';
 
 
@@ -34,5 +34,12 @@ export const updateTransactionDate = (date) => {
     return {
         type: UPDATE_TRANSACTION_DATE,
         payload: date
+    }
+}
+
+export const updateLocation = (location) => {
+    return {
+        type: UPDATE_LOCATION,
+        payload: location
     }
 }

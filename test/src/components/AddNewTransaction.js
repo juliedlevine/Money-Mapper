@@ -6,6 +6,15 @@ import { Actions } from 'react-native-router-flux';
 import { addNewTransaction } from '../actions';
 import { Button, CardSection, Card } from './common';
 import MyDatePicker from './DatePicker';
+import LocationSearch from './LocationSearch';
+
+// <TextInput
+//     style={styles.input}
+//     placeholder='Location (leave blank if none)'
+//     onChangeText={text => this.updateLocation(text)}
+//     autoCorrect={false}
+//     autoCapitalize={'none'}
+//     value={this.state.merchant} />
 
 class AddNewSubcategory extends React.Component {
     constructor(props) {
@@ -15,7 +24,6 @@ class AddNewSubcategory extends React.Component {
             subcategory: '',
             subcategory_id: '',
             description: '',
-            location: '',
             amount: '',
             showPicker: false,
             subcategorySelected: false,
@@ -67,7 +75,7 @@ class AddNewSubcategory extends React.Component {
         }
         let subcategory_id = this.state.subcategory_id;
         let description = this.state.description;
-        let location = this.state.location;
+        let location = this.props.location;
         let amount = this.state.amount;
         if (subcategory_id === '' || description === '' || amount === '') {
             this.setState({
@@ -125,6 +133,7 @@ class AddNewSubcategory extends React.Component {
     render() {
         return (
             <ScrollView style={{ marginBottom: this.state.keyboardOffset }}>
+
                 <View style={styles.intro}>
                 <Image source={require('./Resources/check.png')} style={styles.icon} />
                 <Text style={styles.headerText}>Add New Transaction {this.props.categorySelected}</Text>
@@ -160,15 +169,12 @@ class AddNewSubcategory extends React.Component {
                         placeholder='Merchant Description'
                         onChangeText={text => this.updateDescription(text)}
                         autoCorrect={false}
-                        autoCapitalize={'none'}
+                        autoCapitalize={'words'}
                         value={this.state.description} />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Location (leave blank if none)'
-                        onChangeText={text => this.updateLocation(text)}
-                        autoCorrect={false}
-                        autoCapitalize={'none'}
-                        value={this.state.merchant} />
+
+                    <View style={styles.locationSearch}>
+                        <LocationSearch />
+                    </View>
                     <TextInput
                         style={styles.input}
                         placeholder='Amount'
@@ -192,6 +198,18 @@ class AddNewSubcategory extends React.Component {
     }
 }
 const styles = {
+    locationSearch: {
+        fontFamily: 'Avenir',
+        padding: 12,
+        marginBottom: 10,
+        fontSize: 16,
+        borderWidth: 1,
+        borderColor: '#42f4bf',
+        borderRadius: 8,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        color: '#C7C7CD'
+    },
     error: {
         color: 'red',
         fontSize: 17,
@@ -294,10 +312,12 @@ const styles = {
 }
 
 const mapStateToProps = (state) => {
+    console.log('State:', state);
     return {
         token: state.auth.user.token,
         date: state.expenses.transactionDate,
-        expenses: state.expenses
+        expenses: state.expenses,
+        location: state.expenses.location,
     };
 };
 
