@@ -1,6 +1,6 @@
 import { Actions, ActionConst } from 'react-native-router-flux';
 import axios from 'axios';
-import { UPDATE_TRANSACTION_DATE, UPDATE_LOCATION, LOADING, DONE_LOADING } from '../actions/types';
+import { UPDATE_TRANSACTION_DATE, UPDATE_LOCATION, LOADING, DONE_LOADING, GET_EXPENSES } from '../actions/types';
 import baseurl from '../url';
 
 
