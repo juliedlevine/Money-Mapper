@@ -43,7 +43,8 @@ export default (state = INITIAL_STATE, action) => {
 
     case GET_EXPENSES:
         return { ...state,
-            expenses: action.payload
+            expenses: action.payload,
+            location: ''
         }
 
     case UPDATE_CATEGORY_SELECTED:
@@ -65,7 +66,8 @@ export default (state = INITIAL_STATE, action) => {
         },0);
         newExpenses[rowId][mainCategory].monthlyBudget = Number(newMonthlyBudget);
         return { ...state,
-            expenses: newExpenses
+            expenses: newExpenses,
+            location: ''
         }
 
     case SAVE_SETTINGS:
