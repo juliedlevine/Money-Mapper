@@ -1,6 +1,7 @@
 import { Actions, ActionConst } from 'react-native-router-flux';
 import axios from 'axios';
 import baseurl from '../url';
+import { GET_EXPENSES } from '../actions/types';
 
 // action dispatched when user clicks Done button on Add New Subcategory page
 export const addNewSubcategory = (token, categoryName, subcategory, amount) => {
@@ -18,10 +19,35 @@ export const addNewSubcategory = (token, categoryName, subcategory, amount) => {
         axios.post(endpoint, axiosData)
             .then(response => {
                 // After everything is successful re-route the user to the settings page
-                Actions.pop();
+                getExpenseData(dispatch, token);
+                // Actions.pop({ type: ActionConst.REFRESH });
             })
             .catch(err => {
                 console.log('error: ', err);
             });
     };
+};
+
+const getExpenseData = (dispatch, token) => {
+    console.log('getting expense data');
+    // return (dispatch) => {
+
+        const axiosData = {
+            token: token,
+            timeFrame: "thismonth"
+        };
+        const endpoint = baseurl + "/api/expenses2";
+        axios.post(endpoint, axiosData)
+            .then(response => {
+                console.log('back from getting expenses');
+                dispatch({
+                    type: GET_EXPENSES,
+                    payload: response.data
+                });
+                Actions.pop({ type: ActionConst.REFRESH });
+        })
+        .catch(err => {
+            console.log('error retrieving expenses: ', err);
+        });
+    // };
 };
