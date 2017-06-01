@@ -25,7 +25,7 @@ export const addNewTransaction = (token, date, subcategory_id, description, loca
         axios.post(endpoint, axiosData)
             .then(response => {
                 // After everything is successful re-route the user to the home page
-                getExpenseData(token);
+                getExpenseData(dispatch, token);
                 dispatch({ type: DONE_LOADING });
                 Actions.home({type: ActionConst.RESET});
             })
@@ -50,8 +50,7 @@ export const updateLocation = (location) => {
     }
 }
 
-const getExpenseData = (token) => {
-    return (dispatch) => {
+const getExpenseData = (dispatch, token) => {
 
         const axiosData = {
             token: token,
@@ -69,5 +68,4 @@ const getExpenseData = (token) => {
         .catch(err => {
             console.log('error retrieving expenses: ', err);
         });
-    };
 };

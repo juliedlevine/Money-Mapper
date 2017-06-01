@@ -141,7 +141,7 @@ class AddNewSubcategory extends React.Component {
     }
 
     render() {
-        console.log('loading', this.props.loading);
+
         return (
             <ScrollView style={{ marginBottom: this.state.keyboardOffset }}>
 
