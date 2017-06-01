@@ -15,10 +15,12 @@ export const displaySubcategoryTransactionDetails = (token, subCategoryName, sub
       const endpoint = baseurl + "/api/subcategorytransactions";
       axios.post(endpoint, axiosData)
           .then(response => {
-              // console.log('response for transaction details: ', response.data);
               dispatch({
                   type: DISPLAY_SUB_DETAILS,
-                  payload: response.data
+                  payload: {
+                      data: response.data,
+                      name: subCategoryName
+                  }
               });
 
               Actions.viewSubcategoryTransactions();

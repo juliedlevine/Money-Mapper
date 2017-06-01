@@ -98,6 +98,7 @@ class Signup extends Component {
                 <TextInput
                     style={styles.searchInput}
                     placeholder='Email'
+                    keyboardTyle='email-address'
                     autoCorrect={false}
                     onChange={this.email.bind(this)}
                     value={this.state.email} />
