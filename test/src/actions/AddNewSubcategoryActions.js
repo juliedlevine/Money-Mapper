@@ -29,8 +29,6 @@ export const addNewSubcategory = (token, categoryName, subcategory, amount) => {
 };
 
 const getExpenseData = (dispatch, token) => {
-    console.log('getting expense data');
-    // return (dispatch) => {
 
         const axiosData = {
             token: token,
@@ -39,7 +37,6 @@ const getExpenseData = (dispatch, token) => {
         const endpoint = baseurl + "/api/expenses2";
         axios.post(endpoint, axiosData)
             .then(response => {
-                console.log('back from getting expenses');
                 dispatch({
                     type: GET_EXPENSES,
                     payload: response.data
@@ -49,5 +46,4 @@ const getExpenseData = (dispatch, token) => {
         .catch(err => {
             console.log('error retrieving expenses: ', err);
         });
-    // };
 };
