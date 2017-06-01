@@ -75,7 +75,7 @@ export const updateAmount = (value, mainCategory, rowId, idx, subCategoryName) =
 
 // this isnt working. Supposed to get sent over to Login reducer to set state back to inital state
 export const logout = () => {
-    Actions.auth();
+    Actions.auth({type: ActionConst.RESET});
     return {
         type: LOGOUT
     }

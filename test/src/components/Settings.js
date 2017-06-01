@@ -1,7 +1,7 @@
 console.disableYellowBox = true;
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ListView, ScrollView, TouchableHighlight, Modal } from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ListView, ScrollView, TouchableHighlight, Modal, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
 import { getExpenseData, updateAmount, updateCategorySelected, saveExpenseData } from '../actions';
@@ -9,9 +9,30 @@ import { Button, CardSection, Card } from './common';
 
 
 class Settings extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            keyboardOffset: 0,
+        }
+    }
 
     componentDidMount() {
         this.props.getExpenseData(this.props.user.token);
+        _keyboardWillShowSubscription = DeviceEventEmitter.addListener('keyboardWillShow', (e) => this._keyboardWillShow(e));
+        _keyboardWillHideSubscription = DeviceEventEmitter.addListener('keyboardWillHide', (e) => this._keyboardWillHide(e));
+    }
+
+    componentWillUnmount() {
+      _keyboardWillShowSubscription.remove();
+      _keyboardWillHideSubscription.remove();
+    }
+
+    _keyboardWillShow(e) {
+      this.setState({ keyboardOffset: e.endCoordinates.height });
+    }
+
+    _keyboardWillHide(e) {
+      this.setState({ keyboardOffset: 0, message: '', buttonDisabled: false });
     }
 
     amountChanged(value, mainCategory, rowId, idx, subCategoryName) {
@@ -66,12 +87,10 @@ class Settings extends React.Component {
 
                     {this.subcategories(subcategories, mainCategory, rowId)}
 
-                    <View style={styles.container}>
+                    <TouchableOpacity style={styles.container} onPress={()=> this.addNew(mainCategory)}>
                         <Text style={styles.add}>Add Subcategory</Text>
-                        <TouchableHighlight onPress={()=> this.addNew(mainCategory)}>
-                            <Image source={require('./Resources/plus.png')} style={styles.plusIcon} />
-                        </TouchableHighlight>
-                    </View>
+                        <Image source={require('./Resources/plus.png')} style={styles.plusIcon} />
+                    </TouchableOpacity>
 
                 </Card>
             </View>
@@ -91,7 +110,7 @@ class Settings extends React.Component {
         },0);
 
         return (
-            <View>
+            <ScrollView style={{ marginBottom: this.state.keyboardOffset }}>
                 <ListView
                     dataSource={this.dataSource}
                     renderRow={this.renderRow.bind(this)}
@@ -110,7 +129,7 @@ class Settings extends React.Component {
                         </View>
                     )}/>
 
-            </View>
+            </ScrollView>
         )
     }
 };

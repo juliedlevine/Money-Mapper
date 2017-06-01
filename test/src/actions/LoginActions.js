@@ -1,4 +1,4 @@
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import axios from 'axios';
 import baseurl from '../url';
 
@@ -56,5 +56,5 @@ const loginUserSuccess = (dispatch, user) => {
   });
 
   // After everything is successful re-route the user to the main page
-  Actions.main();
+  Actions.main({type: ActionConst.RESET});
 };

@@ -96,18 +96,21 @@ class AddNewSubcategory extends React.Component {
     }
 
     hidePicker() {
-        let subcategory_id = this.props.expenses.expenses[0].Food.subcategories[0].Groceries.id;
-        if (this.state.subcategory === '') {
-            this.setState({
-                subcategory: 'Groceries',
-                subcategory_id: subcategory_id,
-            })
-        }
-        this.setState({
-            showPicker: false,
-            subcategorySelected: true,
-        });
-    }
+           let firstCategory = Object.keys(this.props.expenses.expenses[0])[0];
+           let firstSubcategory =  Object.keys(this.props.expenses.expenses[0][firstCategory].subcategories[0])[0];
+           let subcategory_id = this.props.expenses.expenses[0][firstCategory].subcategories[0][firstSubcategory].id;
+
+           if (this.state.subcategory === '') {
+               this.setState({
+                   subcategory: firstSubcategory,
+                   subcategory_id: subcategory_id,
+               })
+           }
+           this.setState({
+               showPicker: false,
+               subcategorySelected: true,
+           });
+       }
 
     buildPickerList(){
         let itemList = this.props.expenses.expenses.map(category => {
@@ -129,6 +132,7 @@ class AddNewSubcategory extends React.Component {
                 <View style={styles.intro}>
                 <Image source={require('./Resources/check.png')} style={styles.icon} />
                 <Text style={styles.headerText}>Add New Transaction {this.props.categorySelected}</Text>
+
                     <MyDatePicker />
 
                     {this.state.showPicker ?
@@ -139,9 +143,9 @@ class AddNewSubcategory extends React.Component {
                           onValueChange={this.onValueChange.bind(this)}>
                           {this.buildPickerList()}
                         </Picker>
-                        <View style={styles.done}>
-                            <Text style={styles.doneText} onPress={this.hidePicker.bind(this)}>Make Selection</Text>
-                        </View>
+                        <TouchableHighlight style={styles.done} onPress={this.hidePicker.bind(this)}>
+                            <Text style={styles.doneText}>Select Category</Text>
+                        </TouchableHighlight>
                         </View>
                         :
 
@@ -263,7 +267,7 @@ const styles = {
         alignItems: 'center',
         fontFamily: 'Avenir',
         padding: 30,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     icon: {
         width: 40,

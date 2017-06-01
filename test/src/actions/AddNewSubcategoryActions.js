@@ -18,7 +18,7 @@ export const addNewSubcategory = (token, categoryName, subcategory, amount) => {
         axios.post(endpoint, axiosData)
             .then(response => {
                 // After everything is successful re-route the user to the settings page
-                Actions.budgetConfig({type: ActionConst.RESET});
+                Actions.pop();
             })
             .catch(err => {
                 console.log('error: ', err);

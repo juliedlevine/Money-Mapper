@@ -1,7 +1,7 @@
 console.disableYellowBox = true;
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ListView, ScrollView, TouchableHighlight, Modal, TouchableWithoutFeedback } from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ListView, ScrollView, TouchableHighlight, Modal, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
 import { getExpenseData, updateAmount, updateCategorySelected, displaySubcategoryTransactionDetails, logout } from '../actions';
@@ -30,10 +30,10 @@ class Home extends React.Component {
             let monthlyBudget = this.props.expenses[rowId][mainCategory].subcategories[idx][subCategoryName].monthlyBudget;
             let monthlySpent = this.props.expenses[rowId][mainCategory].subcategories[idx][subCategoryName].spent;
             return (
-                <View style={styles.container}>
-                    <Text onPress={() => this.onClickDisplaySubcategoryDetails(subCategoryName, subcategory[Object.keys(subcategory)[0]].id)} style={styles.subcategory}>{subCategoryName}</Text>
+                <TouchableOpacity style={styles.container} onPress={() => this.onClickDisplaySubcategoryDetails(subCategoryName, subcategory[Object.keys(subcategory)[0]].id)}>
+                    <Text style={styles.subcategory}>{subCategoryName}</Text>
                     <Text style={styles.inputText}>{'$' + monthlySpent + ' of $' + monthlyBudget}</Text>
-                </View>
+                </TouchableOpacity>
             )
         })
         return (subCategoryRows);
@@ -128,12 +128,12 @@ class Home extends React.Component {
                             </CardSection>
 
                             <CardSection>
-                                <View style={styles.totals}>
-                                    <Text onPress={()=> this.mapClick()} style={styles.totalsText}>Map View</Text>
-                                    <TouchableWithoutFeedback onPress={()=> this.mapClick()}>
-                                    <Image source={require('./Resources/map.png')} style={styles.map} />
-                                    </TouchableWithoutFeedback>
-                                </View>
+                                <TouchableOpacity style={styles.totals} onPress={()=> this.mapClick()}>
+                                    <View style={styles.totals}>
+                                        <Text style={styles.totalsText}>Map View</Text>
+                                        <Image source={require('./Resources/map.png')} style={styles.map} />
+                                    </View>
+                                </TouchableOpacity>
                             </CardSection>
 
                             <View style={styles.separator}></View>
@@ -202,13 +202,13 @@ const styles = {
         fontFamily: 'Avenir',
         fontWeight: '600',
         alignSelf: 'center',
-        paddingRight: 10,
+        paddingRight: 5,
     },
     lastAmount: {
         paddingBottom: 20,
     },
     inputText: {
-        width: 235,
+        width: 200,
         height: 25,
         marginTop: 10,
         marginBottom: 10,
@@ -232,13 +232,15 @@ const styles = {
         alignSelf: 'center',
         fontSize: 17,
         fontWeight: '600',
-        paddingRight: 10,
+        paddingRight: 5,
     },
     subcategory: {
         fontFamily: 'Avenir',
         paddingLeft: 10,
         fontSize: 15,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        color: 'black',
+        fontWeight: '600',
     },
     add: {
         fontFamily: 'Avenir',

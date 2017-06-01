@@ -14,7 +14,6 @@ class MyDatePicker extends React.Component {
   render(){
     return (
       <DatePicker
-        style={{width: 200}}
         date={this.state.date}
         mode="date"
         placeholder="select date"
@@ -23,14 +22,9 @@ class MyDatePicker extends React.Component {
         cancelBtnText="Cancel"
         customStyles={{
           dateIcon: {
-            position: 'absolute',
-            left: 0,
-            top: 4,
-            marginLeft: -58,
+            display: 'none',
           },
           dateInput: {
-            marginLeft: -12,
-            width: 300,
             height: 45,
             borderColor: '#42f4bf',
             borderWidth: 1,
@@ -40,9 +34,6 @@ class MyDatePicker extends React.Component {
                 fontSize: 16,
                 fontFamily: 'Avenir'
             },
-            dateTouchBody: {
-                width: 257,
-            }
         }}
         onDateChange={(date) => {
             this.props.updateTransactionDate(date);

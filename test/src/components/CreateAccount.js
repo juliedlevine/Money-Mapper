@@ -82,12 +82,14 @@ class Signup extends Component {
                 <Image source={require('./Resources/id-card.png')} style={styles.icon} />
                 <Text style={styles.container}>Welcome! Please Fill out all fields.</Text>
                 <TextInput
+                    autoCapitalize={'words'}
                     style={styles.searchInput}
                     placeholder='First Name'
                     onChange={this.first.bind(this)}
                     autoCorrect={false}
                     value={this.state.first} />
                 <TextInput
+                autoCapitalize={'words'}
                     style={styles.searchInput}
                     placeholder='Last Name'
                     autoCorrect={false}
@@ -133,8 +135,9 @@ const styles = {
         alignItems: 'center'
     },
     description: {
+        fontFamily: 'Avenir',
         marginBottom: 20,
-        fontSize: 18,
+        fontSize: 15,
         textAlign: 'center',
         color: '#656565'
     },
@@ -152,19 +155,22 @@ const styles = {
         justifyContent: 'center'
     },
     buttonText: {
-        fontSize: 18,
+        fontFamily: 'Avenir',
+        fontSize: 15,
         color: 'white',
         alignSelf: 'center'
     },
     searchInput: {
+        paddingLeft: 8,
         height: 45,
         padding: 4,
         marginBottom: 10,
-        fontSize: 16,
+        fontSize: 15,
         borderWidth: 1,
         borderColor: '#42f4bf',
         borderRadius: 8,
-        color: 'black'
+        color: 'black',
+        fontFamily: 'Avenir',
     },
     separator: {
         height: 40,
