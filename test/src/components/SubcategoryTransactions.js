@@ -33,7 +33,7 @@ class ViewTransactions extends React.Component {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-        this.dataSource = ds.cloneWithRows(this.props.transactionDetails);
+        this.dataSource = ds.cloneWithRows(this.props.details);
 
         return (
             <View>
@@ -43,7 +43,7 @@ class ViewTransactions extends React.Component {
                     renderHeader={()=> (
                         <View style={styles.intro}>
                             <Image source={require('./Resources/atm.png')} style={styles.icon} />
-                            <Text style={styles.statusText}>Transactions this Month</Text>
+                            <Text style={styles.statusText}>{this.props.name}</Text>
 
                             <View style={styles.separator}></View>
 
@@ -152,7 +152,8 @@ const styles = {
 const mapStateToProps = (state) => {
     return {
         user: state.auth.user,
-        transactionDetails: state.transactionDetails
+        details: state.transactionDetails.details,
+        name: state.transactionDetails.name,
     };
 };
 

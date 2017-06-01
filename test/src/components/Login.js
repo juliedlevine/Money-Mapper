@@ -60,6 +60,7 @@ class Login extends Component {
                     onChangeText={value => this.props.loginFormUpdate({ prop: 'email', value: value })}
                     autoCorrect={false}
                     autoCapitalize={'none'}
+                    keyboardTyle='email-address'
                     value={this.props.email} />
                 <TextInput
                     style={styles.searchInput}

@@ -89,7 +89,7 @@ class Signup extends Component {
                     autoCorrect={false}
                     value={this.state.first} />
                 <TextInput
-                autoCapitalize={'words'}
+                    autoCapitalize={'words'}
                     style={styles.searchInput}
                     placeholder='Last Name'
                     autoCorrect={false}
@@ -98,6 +98,7 @@ class Signup extends Component {
                 <TextInput
                     style={styles.searchInput}
                     placeholder='Email'
+                    keyboardTyle='email-address'
                     autoCorrect={false}
                     onChange={this.email.bind(this)}
                     value={this.state.email} />
