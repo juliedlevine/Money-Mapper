@@ -49,7 +49,7 @@ class Signup extends Component {
     password(text) {
         this.setState({ password: text });
         if (text !== this.state.confirm){
-          this.setState({ error: 'Passwords much match'});
+          this.setState({ error: 'Passwords must match.'});
         } else {
           this.setState({ error: '' });
         }
@@ -57,7 +57,7 @@ class Signup extends Component {
     confirm(text) {
         this.setState({ confirm: text });
         if (this.state.password !== text){
-          this.setState({ error: 'Passwords much match'});
+          this.setState({ error: 'Passwords must match.'});
         } else {
           this.setState({ error: '' });
         }
@@ -68,8 +68,11 @@ class Signup extends Component {
         let password = this.state.password;
         let first = this.state.first;
         let last = this.state.last;
-        if (this.state.password === this.state.confirm){
-          console.log('starting signup');
+        if (email === '' || password === '' || first === '' || last === '') {
+            this.setState({
+                error: 'Please fill out all the fields.'
+            })
+        } else if (this.state.password === this.state.confirm) {
           this.props.createUserAccount(first, last, email, password)
         }
 
@@ -128,7 +131,7 @@ class Signup extends Component {
                     onChangeText={text => this.confirm(text)}
                     secureTextEntry={true}
                     value={this.state.confirm} />
-                <Text>
+                <Text style={styles.error}>
                   {this.state.error}
                 </Text>
 
@@ -142,6 +145,12 @@ class Signup extends Component {
 }
 
 const styles = {
+    error: {
+        fontFamily: 'Avenir',
+        fontSize: 20,
+        alignSelf: 'center',
+        color: 'red'
+    },
     container: {
         padding: 30,
         marginTop: 30,
