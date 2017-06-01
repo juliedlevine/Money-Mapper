@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { View, Text, Image, TextInput, TouchableHighlight, DatePickerIOS, Picker, Item, ScrollView, Keyboard, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { addNewTransaction } from '../actions';
-import { Button, CardSection, Card } from './common';
+import { Button, CardSection, Card, Spinner } from './common';
 import MyDatePicker from './DatePicker';
 import LocationSearch from './LocationSearch';
 
@@ -125,7 +125,23 @@ class AddNewSubcategory extends React.Component {
         return itemList;
     }
 
+    renderButton() {
+        if (this.props.loading) {
+            return <Spinner size='large' />;
+        }
+        return (
+            <TouchableHighlight
+                disabled={this.state.buttonDisabled}
+                style={styles.button}
+                onPress={this.addNewClick.bind(this)}
+                underlayColor='#99d9f4'>
+                <Text style={styles.buttonText}>Done</Text>
+            </TouchableHighlight>
+        );
+    }
+
     render() {
+        console.log('loading', this.props.loading);
         return (
             <ScrollView style={{ marginBottom: this.state.keyboardOffset }}>
 
@@ -180,13 +196,9 @@ class AddNewSubcategory extends React.Component {
                         keyboardType='numeric'
                         value={this.state.amount} />
                     <Text style={styles.error}>{this.state.message}</Text>
-                    <TouchableHighlight
-                        disabled={this.state.buttonDisabled}
-                        style={styles.button}
-                        onPress={this.addNewClick.bind(this)}
-                        underlayColor='#99d9f4'>
-                        <Text style={styles.buttonText}>Done</Text>
-                    </TouchableHighlight>
+
+                    {this.renderButton()}
+
 
                 </View>
             </ScrollView>
@@ -313,6 +325,7 @@ const mapStateToProps = (state) => {
         date: state.expenses.transactionDate,
         expenses: state.expenses,
         location: state.expenses.location,
+        loading: state.expenses.loading,
     };
 };
 

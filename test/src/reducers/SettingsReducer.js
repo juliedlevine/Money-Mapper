@@ -5,7 +5,9 @@ import {
     UPDATE_CATEGORY_SELECTED,
     SAVE_SETTINGS,
     UPDATE_TRANSACTION_DATE,
-    UPDATE_LOCATION
+    UPDATE_LOCATION,
+    LOADING,
+    DONE_LOADING,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -13,10 +15,21 @@ const INITIAL_STATE = {
   categorySelected: '',
   transactionDate: '',
   location: '',
+  loading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+
+    case LOADING:
+        return { ...state,
+            loading: true,
+        }
+
+    case DONE_LOADING:
+        return { ...state,
+            loading: false,
+        }
 
     case UPDATE_TRANSACTION_DATE:
         return { ...state,

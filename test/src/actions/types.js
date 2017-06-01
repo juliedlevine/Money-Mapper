@@ -17,3 +17,5 @@ export const SAVE_SETTINGS = 'save_settings';
 export const DISPLAY_SUB_DETAILS = 'display_sub_details';
 export const UPDATE_TRANSACTION_DATE = 'update_transaction_date';
 export const UPDATE_LOCATION = 'update_location';
+export const LOADING = 'loading';
+export const DONE_LOADING = 'done_loading';

@@ -1,6 +1,7 @@
 import {
   LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAIL
+  LOGIN_USER_FAIL,
+  CREATING_USER,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -12,6 +13,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+
+    case CREATING_USER:
+        return {...state,
+            loading: true,
+        }
 
     case LOGIN_USER_SUCCESS:
       return { ...state,

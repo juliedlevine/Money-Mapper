@@ -1,6 +1,6 @@
 import { Actions, ActionConst } from 'react-native-router-flux';
 import axios from 'axios';
-import { UPDATE_TRANSACTION_DATE, UPDATE_LOCATION } from '../actions/types';
+import { UPDATE_TRANSACTION_DATE, UPDATE_LOCATION, LOADING, DONE_LOADING } from '../actions/types';
 import baseurl from '../url';
 
 
@@ -8,6 +8,10 @@ import baseurl from '../url';
 export const addNewTransaction = (token, date, subcategory_id, description, location, amount) => {
 
     return (dispatch) => {
+
+        // go to settings reducer
+        dispatch({ type: LOADING });
+
         const axiosData = {
             token: token,
             date: date,
@@ -18,14 +22,15 @@ export const addNewTransaction = (token, date, subcategory_id, description, loca
         };
 
         const endpoint = baseurl + "/api/addnewtransaction";
-        console.log('Axios data', axiosData);
         axios.post(endpoint, axiosData)
             .then(response => {
                 // After everything is successful re-route the user to the home page
                 getExpenseData(token);
+                dispatch({ type: DONE_LOADING });
                 Actions.home({type: ActionConst.RESET});
             })
             .catch(err => {
+                dispatch({ type: DONE_LOADING });
                 console.log('error: ', err);
             });
     };

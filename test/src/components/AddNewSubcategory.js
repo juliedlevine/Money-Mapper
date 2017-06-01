@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { View, Text, Image, TextInput, TouchableHighlight, ScrollView, DeviceEventEmitter } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { addNewSubcategory } from '../actions';
-import { Button, CardSection, Card } from './common';
+import { Button, CardSection, Card, Spinner } from './common';
 
 class AddNewSubcategory extends React.Component {
     constructor(props) {
@@ -51,6 +51,20 @@ class AddNewSubcategory extends React.Component {
         this.props.addNewSubcategory(token, categoryName, subcategory, amount);
     }
 
+    renderButton() {
+        if (this.props.loading) {
+            return <Spinner size='large' />;
+        }
+        return (
+            <TouchableHighlight
+                style={styles.button}
+                onPress={this.addNewClick.bind(this)}
+                underlayColor='#99d9f4'>
+                <Text style={styles.buttonText}>Done</Text>
+            </TouchableHighlight>
+        );
+    }
+
     render() {
         return (
             <ScrollView style={{ marginBottom: this.state.keyboardOffset }}>
@@ -72,12 +86,8 @@ class AddNewSubcategory extends React.Component {
                             autoCapitalize={'none'}
                             keyboardType='numeric'
                             value={this.state.amount} />
-                        <TouchableHighlight
-                            style={styles.button}
-                            onPress={this.addNewClick.bind(this)}
-                            underlayColor='#99d9f4'>
-                            <Text style={styles.buttonText}>Done</Text>
-                        </TouchableHighlight>
+
+                        {this.renderButton()}
 
                 </View>
             </ScrollView>
@@ -133,7 +143,8 @@ const styles = {
 const mapStateToProps = (state) => {
     return {
         token: state.auth.user.token,
-        categorySelected: state.expenses.categorySelected
+        categorySelected: state.expenses.categorySelected,
+        loading: state.expenses.loading
     };
 };
 

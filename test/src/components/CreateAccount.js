@@ -75,6 +75,18 @@ class Signup extends Component {
 
     }
 
+    renderButton() {
+        console.log('loading', this.props.loading);
+        if (this.props.loading) {
+            return <Spinner size='large' />;
+        }
+        return (
+            <TouchableHighlight style={styles.button} onPress={() => this.signUp()} underlayColor='#99d9f4'>
+                <Text style={styles.buttonText}>Sign Up</Text>
+            </TouchableHighlight>
+        );
+    }
+
     render() {
         return (
             <ScrollView style={{ flex: 1, marginBottom: this.state.keyboardOffset }}>
@@ -119,9 +131,9 @@ class Signup extends Component {
                 <Text>
                   {this.state.error}
                 </Text>
-                <TouchableHighlight style={styles.button} onPress={() => this.signUp()} underlayColor='#99d9f4'>
-                    <Text style={styles.buttonText}>Sign Up</Text>
-                </TouchableHighlight>
+
+                {this.renderButton()}
+
 
           </View>
           </ScrollView>
@@ -182,10 +194,12 @@ const styles = {
     }
 };
 
-// const mapStateToProps = (state) => {
-//   return { signUpEmail: state.auth.signUpEmail, signUpPassword: state.auth.signUpPassword, signUpError: state.auth.signUpError, signUpLoading: state.auth.signUpLoading };
-// };
-//
-export default connect(null, { createUserAccount })(Signup);
+const mapStateToProps = (state) => {
+    return {
+        loading: state.createAccount.loading
+    };
+};
+
+export default connect(mapStateToProps, { createUserAccount })(Signup);
 
 // export default Signup;
