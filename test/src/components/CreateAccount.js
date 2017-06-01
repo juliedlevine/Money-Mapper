@@ -89,7 +89,7 @@ class Signup extends Component {
                     autoCorrect={false}
                     value={this.state.first} />
                 <TextInput
-                autoCapitalize={'words'}
+                    autoCapitalize={'words'}
                     style={styles.searchInput}
                     placeholder='Last Name'
                     autoCorrect={false}
