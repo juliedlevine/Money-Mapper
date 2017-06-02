@@ -216,7 +216,7 @@ const styles = {
         color: 'black',
         textAlign: 'right',
         paddingRight: 10,
-        fontFamily: 'Avenir'
+        fontFamily: 'Avenir',
     },
     statusText: {
         fontSize: 16,
@@ -231,7 +231,7 @@ const styles = {
         color: 'white',
         alignSelf: 'center',
         fontSize: 17,
-        fontWeight: '600',
+        fontWeight: '800',
         paddingRight: 5,
     },
     subcategory: {

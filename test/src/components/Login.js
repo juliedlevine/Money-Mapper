@@ -119,6 +119,7 @@ const styles = {
     buttonText: {
         fontFamily: 'Avenir',
         fontSize: 18,
+        fontWeight: '800',
         color: 'white',
         alignSelf: 'center'
     },

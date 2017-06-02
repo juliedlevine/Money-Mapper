@@ -180,7 +180,8 @@ const styles = {
         fontFamily: 'Avenir',
         fontSize: 15,
         color: 'white',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        fontWeight: '800'
     },
     searchInput: {
         paddingLeft: 8,

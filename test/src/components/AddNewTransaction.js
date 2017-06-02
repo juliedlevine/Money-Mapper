@@ -241,7 +241,7 @@ const styles = {
     doneText: {
         fontSize: 16,
         fontFamily: 'Avenir',
-        fontWeight: '600',
+        fontWeight: '800',
         color: '#fff'
     },
     subcategory: {
@@ -315,7 +315,8 @@ const styles = {
         fontFamily: 'Avenir',
         fontSize: 18,
         color: 'white',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        fontWeight: '800',
     },
 }
 

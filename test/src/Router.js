@@ -48,6 +48,8 @@ const styles = {
   },
   navTitle: {
     fontFamily: 'Avenir',
+    fontWeight: '800',
+    fontSize: 17,
     color: 'white', // changing navbar title color
   },
   routerScene: {

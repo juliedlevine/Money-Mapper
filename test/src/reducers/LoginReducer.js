@@ -14,7 +14,7 @@ import {
 // };
 
 const INITIAL_STATE = {
-  email: 'juliemdyer@gmail.com',
+  email: 'Tom@gmail.com',
   password: 'yes',
   user: null,
   loading: false

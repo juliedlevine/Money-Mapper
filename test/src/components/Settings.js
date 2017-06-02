@@ -184,7 +184,7 @@ const styles = {
         color: 'white',
         alignSelf: 'center',
         fontSize: 17,
-        fontWeight: '600',
+        fontWeight: '800',
         paddingRight: 6,
     },
     settingsText: {
