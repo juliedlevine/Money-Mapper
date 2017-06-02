@@ -135,6 +135,7 @@ const RouterComponent = () => {
 Showing all the expenses for each user meant we needed the user to be able to scroll though all the categories. Scrolling is not a automatic capability like it is in the browser, it has to be explicitly coded using either the ListView or ScrollView. The process for getting a ListView working is not the most intuitive and is very different than a typical HTML table or ul / li list. And of course, it's not well documented! With the help of Stephen's video we were were able to get this working the way we wanted.
 
 ```JavaScript
+
 const ds = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2
 });
@@ -208,7 +209,9 @@ return (
          />
 
     </View>
+
 ```
+
 
 ### Keyboard
 The keyboard is another issue we had  that we didn't realize until we started testing on an actual phone. At any point of user input the keyboard would pop up and hide the rest of the page. What you're used to seeing on a mobile app of being able to scroll to see what the keyboard is hiding is not an automatic behavior. And naturally, the solution was not an easy or straightforward one.
@@ -219,7 +222,9 @@ We had to use event handlers that would listen for the keyboard opening event. O
     <img src='screenshots/keyboard.png'></img>
 </p>
 
+
 ```JavaScript
+
 componentDidMount() {
   _keyboardWillShowSubscription = DeviceEventEmitter.addListener('keyboardWillShow', (e) => this._keyboardWillShow(e));
   _keyboardWillHideSubscription = DeviceEventEmitter.addListener('keyboardWillHide', (e) => this._keyboardWillHide(e));
@@ -244,7 +249,10 @@ Another thing that is super easy with the browser that isn't with React Native i
 <p align='center'>
     <img src='screenshots/select.png'></img>
 </p>
+
+
 ```JavaScript
+
 hidePicker() {
        let firstCategory = Object.keys(this.props.expenses.expenses[0])[0];
        let firstSubcategory =  Object.keys(this.props.expenses.expenses[0][firstCategory].subcategories[0])[0];
@@ -284,7 +292,7 @@ We had to do a lot of styling to get this module to fit with the style of our ap
 <p align='center'>
     <img src='screenshots/google_places.png'></img>
 </p>
-</p>
+
 ```JavaScript
 <GooglePlacesAutocomplete
   placeholder='Location (leave blank if none)'
